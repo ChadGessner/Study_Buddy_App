@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using StudyBuddy.DAL;
+using StudyBuddy.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,33 +10,40 @@ namespace StudyBuddy.Controllers
   [ApiController]
   public class StudyController : ControllerBase
   {
-    // GET: api/<StudyController>
+    private ApplicationDbContext _db;
+    public StudyController()
+    {
+      _db = new ApplicationDbContext();
+    }
     [HttpGet]
-    public IEnumerable<string> Get()
+    public IEnumerable<Study> Get()
     {
-      return new string[] { "value1", "value2" };
+      return _db.GetStudies();
     }
 
-    // GET api/<StudyController>/5
+
     [HttpGet("{id}")]
-    public string Get(int id)
+    public Study Get(int id)
     {
-      return "value";
+      return _db.GetStudy(id);
     }
 
-    // POST api/<StudyController>
-    [HttpPost]
-    public void Post([FromBody] string value)
+
+    [HttpPost("{question}/{answer}")]
+    public Study Post(string question, string answer)
     {
+      return _db.AddStudy(question, answer);
     }
 
-    // PUT api/<StudyController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
 
-    // DELETE api/<StudyController>/5
+    //[HttpPut("{studyId}/{userId}")]
+    //public Study PutFavorite(int studyId, int userId)
+    //{
+    //  return _db.FavoriteStudy(studyId, userId);
+
+    //}
+
+
     [HttpDelete("{id}")]
     public void Delete(int id)
     {
