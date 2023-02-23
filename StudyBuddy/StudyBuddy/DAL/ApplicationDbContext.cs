@@ -20,6 +20,7 @@ namespace StudyBuddy.DAL
     // Create the table based off the model
     public DbSet<Study> Study { get; set; }
     public DbSet<User> User { get; set; }
+    public DbSet<Favorite> Favorites { get; set; }
 
     private static IConfigurationRoot _configuration;
 
@@ -36,6 +37,79 @@ namespace StudyBuddy.DAL
         string cnstr = _configuration.GetConnectionString("StringyConnections");
         optionsBuilder.UseSqlServer(cnstr);
       }
+    }
+    public List<User> GetUsers()
+    {
+      return User.ToList();
+    }
+    public User GetUser(string userName, string password)
+    {
+      User user = GetUsers().FirstOrDefault(x => x.UserName == userName && x.Password == password);
+      if (user == null)
+      {
+        return null;
+      }
+      return user;
+    }
+    public User GetUserById(int id)
+    {
+      User user = GetUsers().FirstOrDefault(x => x.Id == id);
+      if(user == null)
+      {
+        return null;
+      }
+      return user;
+    }
+    public User AddUser(string userName, string password)
+    {
+      User.Add(new Models.User()
+      {
+        UserName = userName,
+        Password = password
+      });
+      SaveChanges();
+      return GetUser(userName, password);
+    }
+    public Study FavoriteStudy(int studyId, int userId)
+    {
+      Study study = GetStudy(studyId);
+      User user = GetUserById(userId);
+      Favorite favorite = new Favorite()
+      {
+        StudyId = study.Id,
+        UserId = user.Id
+      };
+      if (user != null && study != null)
+      {
+        Favorites.Add(favorite);
+        SaveChanges();
+        return study;
+      }
+      return null;
+    }
+    public List<Study> GetStudies()
+    {
+      return Study.ToList();
+    }
+    public Study GetStudy(int studyId)
+    {
+      Study study = GetStudies().FirstOrDefault(x => x.Id == studyId);
+      if(study == null)
+      {
+        return null;
+      }
+      return study;
+    }
+    public Study AddStudy(string question, string answer)
+    {
+      Study study = new Study()
+      {
+        Question= question,
+        Answer= answer
+      };
+      Study.Add(study);
+      SaveChanges();
+      return study;
     }
   }
 
