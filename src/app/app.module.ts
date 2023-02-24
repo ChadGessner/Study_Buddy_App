@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { StudyComponent } from './study/study.component';
 import { HeaderComponent } from './header/header.component';
+import { FravritDirective } from './fravrit.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudyComponent,
-    HeaderComponent
+    HeaderComponent,
+    FravritDirective
   ],
   imports: [
     BrowserModule,
