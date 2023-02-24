@@ -42,11 +42,17 @@ namespace StudyBuddy.Controllers
       return _db.FavoriteStudy(studyId, userId);
 
     }
-
-
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpPost("DeleteFavorite/{studyId}/{userId}")]
+    public bool DeleteFavorite(int userId, int studyId)
     {
+      return _db.DeleteFromFavoriteById(userId, studyId);
+    }
+
+
+    [HttpGet("GetAllFavorites/{userId}")]
+    public List<Study> GetAllFavorites(int userId)
+    {
+      return _db.GetAllFavorites(userId);
     }
   }
 }
