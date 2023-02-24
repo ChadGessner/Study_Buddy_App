@@ -22,32 +22,35 @@ namespace StudyBuddy.Controllers
     }
 
 
-    [HttpGet("{id}")]
+    [HttpGet("GetById/{id}")]
     public Study Get(int id)
     {
       return _db.GetStudy(id);
     }
 
 
-    [HttpPost("{question}/{answer}")]
+    [HttpPost("AddQuestion/{question}/{answer}")]
     public Study Post(string question, string answer)
     {
       return _db.AddStudy(question, answer);
     }
 
-
     //[HttpPut("{studyId}/{userId}")]
     //public Study PutFavorite(int studyId, int userId)
     //{
     //  return _db.FavoriteStudy(studyId, userId);
-
     //}
 
-
-    [HttpPost("delete/{studyId}/{userId}")]
+    [HttpPost("RemoveFavorite/{studyId}/{userId}")]
     public void Delete(int studyId, int userId)
     {
        _db.DeleteFromFavoriteById(userId, studyId);
     }
+    [HttpGet("GetAllUserFavorites/{userId}")]
+    public IEnumerable<Study> GetAllUserFavorites(int userId)
+    {
+      return _db.GetAllFavorites(userId);
+    }
+    
   }
 }
