@@ -44,9 +44,10 @@ namespace StudyBuddy.Controllers
     //}
 
 
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpPost("delete/{studyId}/{userId}")]
+    public void Delete(int studyId, int userId)
     {
+       _db.DeleteFromFavoriteById(userId, studyId);
     }
   }
 }

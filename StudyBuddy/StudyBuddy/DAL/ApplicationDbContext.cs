@@ -111,6 +111,32 @@ namespace StudyBuddy.DAL
       SaveChanges();
       return study;
     }
+
+    public bool DeleteFromStudyById(int id)
+    {
+      Study study = GetStudy(id);
+      if(study == null){
+        return false;
+      } 
+      Study.Remove(study);
+      SaveChanges();
+      
+      return true;      
+    }
+
+    public bool DeleteFromFavoriteById(int userId, int studyId)
+    {
+      Favorite favorite = Favorites.Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
+      
+      if(favorite == null){
+        return false;
+      } 
+      Favorites.Remove(favorite);
+      SaveChanges();
+      
+      return true;      
+    }
+
   }
 
 }
