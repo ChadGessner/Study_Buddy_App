@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Renderer2, HostListener } from '@angular/core';
 import { Study } from '../Interfaces/study.interface';
+import { User } from '../Interfaces/user.interface';
 
 @Component({
   selector: 'app-study',
@@ -10,7 +11,7 @@ export class StudyComponent implements OnInit {
   @Input()study:Study | null = null;
   isCanHasAnswer:boolean = false;
   isCanHasPicaard:boolean = true;
-  
+  currentUser:User|null = null;
   constructor(private render:Renderer2, el:ElementRef) {}
   notIsCanAnswer() {
     

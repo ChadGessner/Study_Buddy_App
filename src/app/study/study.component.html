@@ -1,9 +1,14 @@
 <div 
 *ngIf="study !== null" 
 (click)="notIsCanAnswer()" 
-class="flex justify-center align-center column bdr p-10 m-5 white">
-    <h1 >{{study.question}}<span id="fravrit-star" ><i appFravrit class="bi bi-star-fill"></i></span></h1>
-    <p>???????????????????????????????????????????????????</p>
+class="flex justify-center align-center column bdr p-10 m-5 white w-100">
+    <h4>
+        {{study.question}}
+        <span id="fravrit-star" >
+            <i appFravrit class="bi bi-star-fill"></i>
+        </span>
+    </h4>
+    <p class="flex justify-evenly w-80 " ><i class="bi bi-patch-question-fill"></i></p>
     <h1 
     id="answer" 
     *ngIf="isCanHasAnswer" >{{study.answer}}</h1>

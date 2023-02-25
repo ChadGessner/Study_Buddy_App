@@ -4,6 +4,7 @@ import {
      HostListener,
       OnInit,
        Renderer2 } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Directive({
   selector: '[appFravrit]'
@@ -12,7 +13,8 @@ export class FravritDirective implements OnInit {
 
   constructor(
     private render:Renderer2,
-     private el:ElementRef
+     private el:ElementRef,
+      private api:ApiService
      ) { }
 
   @HostListener('document:click', ['$event'])getPink(e:MouseEvent) {
