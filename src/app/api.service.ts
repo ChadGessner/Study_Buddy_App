@@ -49,7 +49,7 @@ export class ApiService implements OnInit {
     let answer = study.answer.split(
       ' '
     ).join('%20');
-    return this.http.post(this.studyURI + `${question}/${answer}`,study);
+    return this.http.post(this.studyURI + `AddQuestion/${question}/${answer}`,study);
   }
   isFavorite() {
 
