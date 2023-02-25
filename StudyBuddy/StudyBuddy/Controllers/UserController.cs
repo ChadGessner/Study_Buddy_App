@@ -36,7 +36,7 @@ namespace StudyBuddy.Controllers
     }
 
 
-    [HttpPut("{studyId}/{userId}")]
+    [HttpPost("SelectFavorite{studyId}/{userId}")]
     public Study PutFavorite(int studyId, int userId)
     {
       return _db.FavoriteStudy(studyId, userId);

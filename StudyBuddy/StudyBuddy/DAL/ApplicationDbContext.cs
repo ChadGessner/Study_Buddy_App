@@ -124,9 +124,10 @@ namespace StudyBuddy.DAL
       }
       return favorites;
     }
+
     public bool DeleteFromFavoriteById(int userId, int studyId)
     {
-      Favorite favorite = Favorites.Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
+      Favorite favorite = JustFavorites().Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
 
       if (favorite == null)
       {

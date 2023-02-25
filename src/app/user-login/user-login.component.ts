@@ -41,7 +41,9 @@ export class UserLoginComponent implements OnInit {
         }else{
           this.addUser(name,pass)
         }
-      
+        if(this.currentUser){
+          this.api.setUser(this.currentUser) // passing the currently logged in user back to service so it is globally available, has to be done this way...
+        }
     },2000)
     
   }

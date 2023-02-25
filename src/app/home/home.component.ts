@@ -16,5 +16,6 @@ export class HomeComponent implements OnInit {
     this.api.getStudy().subscribe(
       (x) => this.studies = x
     )
+    
   }
 }
