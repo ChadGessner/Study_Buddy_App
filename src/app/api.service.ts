@@ -10,7 +10,8 @@ export class ApiService implements OnInit {
 
   constructor(private http:HttpClient) { }
   userURI:string = 'https://localhost:7087/api/User/';
-  selectFavoriteURI:string = 'https://localhost:7087/api/User/SelectFavorite/';
+  loginURI:string = ''
+  selectFavoriteURI:string = 'https://localhost:7087/api/User/AddFavorite/';
   removeFavoriteURI:string = 'https://localhost:7087/api/User/DeleteFavorite/';
   studyURI:string = 'https://localhost:7087/api/Study/';
   currentUser:User|null = null;
@@ -25,12 +26,12 @@ export class ApiService implements OnInit {
     console.log(userName)
     console.log(password);
     console.log(this.userURI + `${userName}/${password}`);
-    return this.http.get<User>(this.userURI + `${userName}/${password}`);
+    return this.http.get<User>(this.userURI + `Login/${userName}/${password}`);
   }
   registerUser(user:User) { // api call to add the newly registered user, only used by login component
     let userName = user.userName;
     let password = user.password;
-    return this.http.post<User>(this.userURI + `${userName}/${password}`,user)
+    return this.http.post<User>(this.userURI + `CreateLogin/${userName}/${password}`,user)
   }
   setUser(currentUser:User){ // sets the currently logged in user in this service so that its globally available to all components, also only used by login component
     this.currentUser = currentUser;

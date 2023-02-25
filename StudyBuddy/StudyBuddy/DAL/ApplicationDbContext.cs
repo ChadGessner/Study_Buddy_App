@@ -136,22 +136,11 @@ namespace StudyBuddy.DAL
     //  return true;      
     //}
 
-    public bool DeleteFromFavoriteById(int userId, int studyId)
+
+    public List<Favorite> JustFavorites()
     {
-      Favorite favorite = Favorites.Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
-      
-      if(favorite == null){
-        return false;
-      } 
-      Favorites.Remove(favorite);
-      SaveChanges();
-      
-      return true;      
+      return Favorites.ToList();
     }
-
-  }
-
-
     public bool DeleteFromFavoriteById(int userId, int studyId)
     {
       Favorite favorite = JustFavorites().Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
@@ -167,4 +156,7 @@ namespace StudyBuddy.DAL
     }
   }
 }
+
+
+
 
