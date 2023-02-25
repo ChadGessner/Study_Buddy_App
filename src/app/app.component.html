@@ -1,25 +1,12 @@
 <app-header></app-header>
-<div class="flex column justify-center align-center lgt-blue bdr m-5">
+<div class="flex column justify-center align-center lgt-blue bdr m-5 ">
+  <router-outlet></router-outlet>
   
-  <form class="flex column bdr p-10 m-5 drk-teal w-80 " #newStudy="ngForm" (ngSubmit)="postStudy(newStudy)" >
-    <label for="question">Question</label>
-    <input name="question" ngModel />
-    <label for="answer">Answer</label>
-    <input name="answer" ngModel />
-    <label for="submit">Submit</label>
-    <button class="sea-green bunton">
-      <i class="bi bi-airplane-engines"></i>
-       bunton 
-       <i class="bi bi-airplane-engines"></i> 
-    </button>
-  </form>
 
 
 
 
-    <div class="flex rows" *ngFor="let study of studies;index as i">
-      <app-study [study]="study"></app-study>
-    </div>
+    
     
 </div>
 

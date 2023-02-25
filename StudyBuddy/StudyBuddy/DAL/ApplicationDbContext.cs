@@ -123,6 +123,7 @@ namespace StudyBuddy.DAL
       return study;
     }
 
+
     //public bool DeleteFromStudyById(int id)
     //{
     //  Study study = GetStudy(id);
@@ -150,5 +151,20 @@ namespace StudyBuddy.DAL
 
   }
 
+
+    public bool DeleteFromFavoriteById(int userId, int studyId)
+    {
+      Favorite favorite = JustFavorites().Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
+
+      if (favorite == null)
+      {
+        return false;
+      }
+      Favorites.Remove(favorite);
+      SaveChanges();
+
+      return true;
+    }
+  }
 }
 
