@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, HostListener } from '@angular/core';
 import { Study } from '../Interfaces/study.interface';
+import { User } from '../Interfaces/user.interface';
 
 @Component({
   selector: 'app-study',
@@ -10,21 +11,22 @@ export class StudyComponent implements OnInit {
   @Input()study:Study | null = null;
   isCanHasAnswer:boolean = false;
   isCanHasPicaard:boolean = true;
+  currentUser:User|null = null;
   constructor(private render:Renderer2, el:ElementRef) {}
   notIsCanAnswer() {
     
     if(this.study && !this.isCanHasAnswer && this.study.answer === 'THERE ARE FOUR LIGHTS!'){
-      console.log(this.isCanHasPicaard);
+      //console.log(this.isCanHasPicaard);
       
       this.fourLights(this.study.answer)
     }
     this.isCanHasAnswer = !this.isCanHasAnswer;
   }
+  
   fourLights(answer:string|null|undefined){
     let url = "https://i.imgur.com/mKtwyFr.jpg";
     let node = document.getElementsByTagName('h1')[0]
-    console.log(node);
-    
+
     if(node){
       node.innerText = ''
       let img = this.render.createElement('img');
@@ -37,10 +39,7 @@ export class StudyComponent implements OnInit {
       this.render.setAttribute(img, 'src', url);
       this.isCanHasPicaard = false;
     }
-      
-      
       return;
-      
   }
   ngOnInit(): void {
     
