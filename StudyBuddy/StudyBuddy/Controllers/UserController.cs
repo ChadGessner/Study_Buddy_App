@@ -51,10 +51,11 @@ namespace StudyBuddy.Controllers
     }
 
 
-    //[HttpDelete("{id}")]
-    //public void Delete(int id)
-    //{
-    //}
+    [HttpPost("DeleteUser/{userId}")]
+    public bool DeleteUser(int userId)
+    {
+      return _db.DeleteUser(userId);
+    }
 
   }
 }

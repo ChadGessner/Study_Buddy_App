@@ -10,6 +10,7 @@ import { FravritDirective } from './fravrit.directive';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateStudyComponent } from './create-study/create-study.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CreateStudyComponent } from './create-study/create-study.component';
     FravritDirective,
     UserLoginComponent,
     HomeComponent,
-    CreateStudyComponent
+    CreateStudyComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
