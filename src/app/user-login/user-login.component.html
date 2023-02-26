@@ -1,6 +1,6 @@
 
-
 <form 
+*ngIf="!loggedInUser"
 class="flex column bdr p-10 m-5 drk-teal w-80 " 
 #login="ngForm" 
 (ngSubmit)="onLogin(login)" >
@@ -15,3 +15,12 @@ class="flex column bdr p-10 m-5 drk-teal w-80 "
        <i class="bi bi-airplane-engines"></i> 
     </button>
   </form>
+  <div 
+  class="flex column bdr p-10 m-5 drk-teal w-80"
+  *ngIf="loggedInUser" >
+    <h4  >{{loggedInUser.User.userName}} is logged in!</h4>
+    <button 
+    (click)="onLogout()"
+    class="sea-green bunton" >Logout</button>
+  </div>
+  
