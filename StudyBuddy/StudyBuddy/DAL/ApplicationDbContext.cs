@@ -42,6 +42,17 @@ namespace StudyBuddy.DAL
     {
       return User.ToList();
     }
+    public bool DeleteUser(int id)
+    {
+      User user = GetUserById(id);
+      if (user != null)
+      {
+        User.Remove(user);
+        SaveChanges();
+        return true;
+      }
+      return false;
+    }
     public User GetUser(string userName, string password)
     {
       User user = GetUsers().FirstOrDefault(x => x.UserName == userName && x.Password == password);

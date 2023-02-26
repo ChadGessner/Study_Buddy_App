@@ -1,5 +1,4 @@
 
-
 <form 
 class="flex column bdr p-10 m-5 drk-teal w-80 " 
 #login="ngForm" 
@@ -15,3 +14,4 @@ class="flex column bdr p-10 m-5 drk-teal w-80 "
        <i class="bi bi-airplane-engines"></i> 
     </button>
   </form>
+  <h1 *ngIf="loggedInUser" >User is logged in!</h1>

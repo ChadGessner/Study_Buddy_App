@@ -18,7 +18,7 @@ export class FravritDirective implements OnInit {
       private api:ApiService
      ) { }
   validateLoginStatus() {
-    this.currentUser = this.api.giveCurrentUser();
+    //this.currentUser = this.api.giveCurrentUser();
     return this.currentUser !== null;
   }
   
