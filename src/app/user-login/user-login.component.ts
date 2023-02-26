@@ -52,6 +52,9 @@ export class UserLoginComponent implements OnInit {
       password: password
     })
   }
+  onLogout(){
+    this.api.onLogout();
+  }
   onLogin(form:NgForm){
     let name = form.form.value.userName;
     let pass = form.form.value.password;
@@ -67,15 +70,11 @@ export class UserLoginComponent implements OnInit {
           this.api.setUser(this.currentUser) // passing the currently logged in user back to service so it is globally available, has to be done this way...
         }
     },2000)
-    
   }
-  // checkUser() {
-  //   let userInterval = setInterval(()=>{
-  //     console.log(this.currentUser)
-  //   },5000)
-  // }
+
   ngOnInit(): void {
     this.api.getAllUsers().subscribe((x)=> this.users = x);
     this.api.loggedInEvent.subscribe((x)=> this.loggedInUser = x);
+    this.api.onComponentLoad();
   }
 }

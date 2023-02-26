@@ -51,12 +51,22 @@ export class ApiService implements OnInit {
       }
     });
   }
+  onComponentLoad() {
+    if(!this.loggedInUser){
+      setTimeout(()=>{
+        return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
+      },500)
+    }
+    return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
+  }
   getRegisteredUser(user:User){
     this.registerUser(user);
     this.getLoggedInUserFavorites();
-    setTimeout(()=>{
-      return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
-    },500)
+    this.onComponentLoad();
+  }
+  onLogout() {
+    this.loggedInUser = null;
+    this.onComponentLoad();
   }
   registerUser(user:User) { // api call to add the newly registered user, only used by login component
     let userName = user.userName;
