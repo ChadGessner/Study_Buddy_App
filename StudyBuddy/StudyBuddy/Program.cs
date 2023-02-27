@@ -6,14 +6,13 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-  options.AddPolicy(name: "CorsPolicy",
-      builder =>
-      {
-        builder.SetIsOriginAllowed(origin => true);
-        builder.AllowAnyMethod();
-        builder.AllowAnyHeader();
-        builder.AllowCredentials();
-      });
+  options.AddPolicy(name: "CorsPolicy", builder =>
+  {
+    builder.SetIsOriginAllowed(origin => true);
+    builder.AllowAnyMethod();
+    builder.AllowAnyHeader();
+    builder.AllowCredentials();
+  });
 });
 
 
@@ -31,7 +30,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 
 app.UseAuthorization();

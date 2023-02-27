@@ -42,6 +42,17 @@ namespace StudyBuddy.DAL
     {
       return User.ToList();
     }
+    public bool DeleteUser(int id)
+    {
+      User user = GetUserById(id);
+      if (user != null)
+      {
+        User.Remove(user);
+        SaveChanges();
+        return true;
+      }
+      return false;
+    }
     public User GetUser(string userName, string password)
     {
       User user = GetUsers().FirstOrDefault(x => x.UserName == userName && x.Password == password);
@@ -100,6 +111,17 @@ namespace StudyBuddy.DAL
       }
       return study;
     }
+
+    public List<Study> GetAllFavorites(int userId)
+    {
+      List<Study> favorites = Favorites.ToList().Where(x => x.UserId == userId).Select(x => GetStudy(x.StudyId)).ToList();
+      if (favorites == null)
+      {
+        return null;
+      }
+      return favorites;
+    }
+
     public Study AddStudy(string question, string answer)
     {
       Study study = new Study()
@@ -111,7 +133,41 @@ namespace StudyBuddy.DAL
       SaveChanges();
       return study;
     }
-  }
 
+
+    //public bool DeleteFromStudyById(int id)
+    //{
+    //  Study study = GetStudy(id);
+    //  if(study == null){
+    //    return false;
+    //  } 
+    //  Study.Remove(study);
+    //  SaveChanges();
+      
+    //  return true;      
+    //}
+
+
+    public List<Favorite> JustFavorites()
+    {
+      return Favorites.ToList();
+    }
+    public bool DeleteFromFavoriteById(int userId, int studyId)
+    {
+      Favorite favorite = JustFavorites().Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
+
+      if (favorite == null)
+      {
+        return false;
+      }
+      Favorites.Remove(favorite);
+      SaveChanges();
+
+      return true;
+    }
+  }
 }
+
+
+
 

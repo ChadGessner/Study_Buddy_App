@@ -22,31 +22,40 @@ namespace StudyBuddy.Controllers
     }
 
 
-    [HttpGet("{userName}/{password}")]
+    [HttpGet("Login/{userName}/{password}")]
     public User Get(string userName, string password)
     {
       return _db.GetUser(userName, password);
     }
 
 
-    [HttpPost("{userName}/{password}")]
+    [HttpPost("CreateLogin/{userName}/{password}")]
     public User Post(string userName,string password)
     {
       return _db.AddUser(userName, password);
     }
 
 
-    [HttpPut("{studyId}/{userId}")]
+
+    [HttpPost("AddFavorite/{studyId}/{userId}")]
+
     public Study PutFavorite(int studyId, int userId)
     {
       return _db.FavoriteStudy(studyId, userId);
 
     }
-
-
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpPost("DeleteFavorite/{studyId}/{userId}")]
+    public bool DeleteFavorite(int userId, int studyId)
     {
+      return _db.DeleteFromFavoriteById(userId, studyId);
     }
+
+
+    [HttpPost("DeleteUser/{userId}")]
+    public bool DeleteUser(int userId)
+    {
+      return _db.DeleteUser(userId);
+    }
+
   }
 }
