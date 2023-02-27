@@ -22,12 +22,14 @@ export class AppComponent implements OnInit {
   getUser() {
 
   }
+
   getPathName() {
     let pathArray = window.location.pathname.split('/');
     return pathArray[
       pathArray.length - 1
     ]
   }
+
   postStudy(newStudy: NgForm) {
     let study: Study = {
       id: -1,
@@ -40,6 +42,7 @@ export class AppComponent implements OnInit {
 
     this.getStudies();
   }
+
   getStudies() {
     this.api.getStudy()
       .subscribe(
@@ -47,10 +50,12 @@ export class AppComponent implements OnInit {
           this.studies = x
       )
   }
+
   notTruthy() {
     this.truthy = !this.truthy;
     console.log(typeof this.studies)
   }
+
   ngOnInit(): void {
     this.getStudies()
 

@@ -1,18 +1,12 @@
 <main>
   <form #newStudy="ngForm" (ngSubmit)="postStudy(newStudy)">
-    
-      <label for="question">Question</label>
-      <input name="question" ngModel />
-      <p></p>
-      <label for="answer">Answer</label>
-      <input name="answer" ngModel />
-    
-    <p></p>
+    <label for="question">Question</label>
+    <input name="question" ngModel />
+    <br>
+    <label for="answer">Answer</label>
+    <input name="answer" ngModel />
+    <br>
     <label for="submit"></label>
-    <button>
-
-      Add Question
-
-    </button>
+    <button>Add Question</button>
   </form>
 </main>

@@ -1,10 +1,10 @@
 <form *ngIf="!loggedInUser" #login="ngForm" (ngSubmit)="onLogin(login)">
   <label for="userName">User Name</label><br>
   <input name="userName" ngModel /><br>
-  
+
   <label for="password">Password</label><br>
   <input name="password" ngModel /><br>
-  
+
   <label for="submit"></label><br>
   <button>Login</button>
 </form>

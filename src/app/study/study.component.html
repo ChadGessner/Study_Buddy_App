@@ -1,5 +1,4 @@
 <main>
-  
     <div *ngIf="study !== null" (click)="notIsCanAnswer()">
         <h4>
             {{study.question}}
@@ -8,7 +7,7 @@
             </span>
         </h4>
         <!--<p><i></i></p>-->
-        <h5 id="answer" *ngIf="isCanHasAnswer">{{study.answer}}</h5>
+        <h5 id="answer" *ngIf="isCanHasAnswer">Answer: {{study.answer}}</h5>
         <hr>
     </div>
 </main>

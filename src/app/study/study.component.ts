@@ -12,7 +12,9 @@ export class StudyComponent implements OnInit {
   isCanHasAnswer:boolean = false;
   isCanHasPicaard:boolean = true;
   currentUser:User|null = null;
+
   constructor(private render:Renderer2, el:ElementRef) {}
+  
   notIsCanAnswer() {
     
     if(this.study && !this.isCanHasAnswer && this.study.answer === 'THERE ARE FOUR LIGHTS!'){

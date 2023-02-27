@@ -10,11 +10,11 @@ import { User } from '../Interfaces/user.interface';
   styleUrls: ['./create-study.component.css']
 })
 export class CreateStudyComponent implements OnInit {
-  studies:Study[] = [];
-  currentUser:User|null = null;
-  constructor(private api:ApiService){}
-  postStudy(newStudy:NgForm) {
-    let study:Study = {
+  studies: Study[] = [];
+  currentUser: User | null = null;
+  constructor(private api: ApiService) { }
+  postStudy(newStudy: NgForm) {
+    let study: Study = {
       id: -1,
       question: newStudy.form.value.question,
       answer: newStudy.form.value.answer
@@ -26,13 +26,13 @@ export class CreateStudyComponent implements OnInit {
   }
   getStudies() {
     this.api.getStudy()
-    .subscribe(
-      (x)=>
-      this.studies = x
-    )
+      .subscribe(
+        (x) =>
+          this.studies = x
+      )
   }
   ngOnInit(): void {
     this.getStudies();
   }
-  
+
 }
