@@ -60,13 +60,14 @@ export class FravritDirective implements OnInit {
           'color',
           'pink'
         )
-        //this.api.selectFavorite()
+        //this.api.onComponentLoad();
       }else{
         this.render.setStyle(
           target,
           'color',
           'grey'
         )
+        //this.api.onComponentLoad();
       }
     }
     ngOnInit(): void {

@@ -10,6 +10,9 @@
 *{
     font-family:monospace;
 }
+.no-wrap {
+    flex-wrap:nowrap;
+}
 .flex {
     display: flex;
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, HostListener } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, HostListener, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
@@ -14,6 +14,8 @@ export class StudyComponent implements OnInit {
   isCanHasAnswer:boolean = false;
   isCanHasPicaard:boolean = true;
   @Input()loggedInUser:LoggedInUser|null = null;
+  @Input()index:number = 0;
+  @Output()clicked:EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor(private api:ApiService, private render:Renderer2, el:ElementRef) {}
   notIsCanAnswer(e:MouseEvent) {
     let target = e.target as HTMLElement
@@ -25,6 +27,7 @@ export class StudyComponent implements OnInit {
       if(this.loggedInUser && this.study){
         let id = this.study.id
         this.api.selectFavorite(id);
+        
       }
       
       
@@ -38,7 +41,12 @@ export class StudyComponent implements OnInit {
     }
     this.isCanHasAnswer = !this.isCanHasAnswer;
   }
-  
+  fravritClicked(){
+    if(this.loggedInUser){
+      return this.clicked.emit(true);
+    }
+    return;
+  }
   fourLights(answer:string|null|undefined){
     let url = "https://i.imgur.com/mKtwyFr.jpg";
     let node = document.getElementsByTagName('h1')[0]

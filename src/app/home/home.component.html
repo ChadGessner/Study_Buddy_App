@@ -1,12 +1,31 @@
-<div class="flex justify-center bdr w-100">
+<div class="flex column justify-center align-center p-10 bdr w-100">
   <app-welcome></app-welcome>
+  <button 
+  *ngIf="loggedInUser"
+  class="flex txt-center justify-center bunton sea-green w-80"
+  (click)="onFiltered()"
+   >{{filtered ? "View All Questions" : "View only Favorites"}}</button>
 </div>
 
-<div class="flex w-100 height-50 justify-evenly">
-  <div class="flex rows align-end bdr h-10 w-20 " 
-*ngFor="let study of studies;index as i">
-    <app-study [study]="study"></app-study>
+  
+<div *ngIf="!filtered || !loggedInUser">
+  <div
+  class="flex rows "
+  *ngFor="let study of studies;index as i">
+    
+      <app-study [index]="i" [study]="study"></app-study>
+    
+  </div>
 </div>
+<div *ngIf="filtered && loggedInUser">
+  <div
+  class="flex rows "
+  *ngFor="let study of loggedInUser.Favorites;index as i">
+    
+      <app-study (clicked)="fravritClicked($event)" [index]="i" [study]="study"></app-study>
+    
+  </div>
 </div>
+
 
 
