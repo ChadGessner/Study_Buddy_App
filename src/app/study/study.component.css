@@ -5,3 +5,9 @@
     --sea-green: #C2EDCE;
     --white: #F6F6F2;
 } */
+.o {
+    min-height: 30px;
+    min-width: 30px;
+    background-color: var(--light-teal);
+    box-shadow: 4px 1px 4px 1px black
+}
