@@ -1,5 +1,12 @@
-<app-welcome></app-welcome>
+<div class="flex justify-center bdr w-100">
+  <app-welcome></app-welcome>
+</div>
 
-<div class="flex rows" *ngFor="let study of studies;index as i">
+<div class="flex w-100 height-50 justify-evenly">
+  <div class="flex rows align-end bdr h-10 w-20 " 
+*ngFor="let study of studies;index as i">
     <app-study [study]="study"></app-study>
-  </div>
+</div>
+</div>
+
+
