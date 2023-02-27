@@ -6,12 +6,22 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { StudyComponent } from './study/study.component';
 import { HeaderComponent } from './header/header.component';
+import { FravritDirective } from './fravrit.directive';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { HomeComponent } from './home/home.component';
+import { CreateStudyComponent } from './create-study/create-study.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudyComponent,
-    HeaderComponent
+    HeaderComponent,
+    FravritDirective,
+    UserLoginComponent,
+    HomeComponent,
+    CreateStudyComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

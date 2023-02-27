@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
 import { Study } from './Interfaces/study.interface';
 import { NgForm } from '@angular/forms'
+import { User } from './Interfaces/user.interface';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,18 @@ export class AppComponent implements OnInit {
   question:string = '';
   answer:string = '';
   truthy:boolean = false;
+  isHome:boolean = this.getPathName() === 'Home';
+  currentUser:User|null = null;
   constructor(private api:ApiService) {}
+  getUser() {
+    
+  }
+  getPathName() {
+    let pathArray = window.location.pathname.split('/');
+    return pathArray[
+      pathArray.length - 1
+    ] 
+  }
   postStudy(newStudy:NgForm) {
     let study:Study = {
       id: -1,

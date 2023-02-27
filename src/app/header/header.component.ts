@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from '../Interfaces/user.interface';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  currentUser:User|null = null;
 }

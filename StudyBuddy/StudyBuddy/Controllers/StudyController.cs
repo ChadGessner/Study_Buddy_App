@@ -49,7 +49,9 @@ namespace StudyBuddy.Controllers
     [HttpGet("GetAllUserFavorites/{userId}")]
     public IEnumerable<Study> GetAllUserFavorites(int userId)
     {
+
       return _db.GetAllFavorites(userId);
+
     }
     
   }
