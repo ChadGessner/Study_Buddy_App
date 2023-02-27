@@ -158,6 +158,6 @@ export class ApiService implements OnInit {
     return this.http.post(this.studyURI + `AddQuestion/${question}/${answer}`,study);
   }
   ngOnInit(): void {
-    
+
   }
 }

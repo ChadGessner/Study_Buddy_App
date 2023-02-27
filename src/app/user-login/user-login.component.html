@@ -1,26 +1,32 @@
 
-<form 
+<form
 *ngIf="!loggedInUser"
-class="flex column bdr p-10 m-5 drk-teal w-80 " 
-#login="ngForm" 
-(ngSubmit)="onLogin(login)" >
+class="flex column bdr p-10 m-5 drk-teal w-80 "
+#login="ngForm">
     <label for="userName">User Name</label>
     <input name="userName" ngModel />
-    <label for="password">Password</label>
-    <input name="password" ngModel />
+    <label for="password" >Password</label>
+    <input name="password" type ="password" ngModel />
     <label for="submit">Submit</label>
-    <button class="sea-green bunton">
+    <button type= "submit" class="sea-green bunton"(click)="onLogin(login)" >
       <i class="bi bi-airplane-engines"></i>
-        bunton 
-       <i class="bi bi-airplane-engines"></i> 
+        Login bunton
+       <i class="bi bi-airplane-engines"></i>
     </button>
+    <button type="button" class="sea-green bunton" (click)="newUser(login)">
+      <i class="bi bi-airplane-engines"></i>
+      Create New User
+      <i class="bi bi-airplane-engines"></i>
+    </button>
+    <h1 class="Login-error" *ngIf="loginError">Incorrect Login Please Try again</h1>
   </form>
-  <div 
+
+  <div
   class="flex column bdr p-10 m-5 drk-teal w-80"
   *ngIf="loggedInUser" >
     <h4  >{{loggedInUser.User.userName}} is logged in!</h4>
-    <button 
+    <button
     (click)="onLogout()"
     class="sea-green bunton" >Logout</button>
   </div>
-  
+
