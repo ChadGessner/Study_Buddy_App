@@ -114,7 +114,7 @@ namespace StudyBuddy.DAL
 
     public List<Study> GetAllFavorites(int userId)
     {
-      List<Study> favorites = Favorites.ToList().Where(x => x.UserId == userId).Select(x => GetStudy(x.StudyId)).ToList();
+      List<Study> favorites = JustFavorites().Where(x => x.UserId == userId).Select(x => GetStudy(x.StudyId)).ToList();
       if (favorites == null)
       {
         return null;

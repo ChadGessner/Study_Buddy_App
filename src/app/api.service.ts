@@ -18,20 +18,59 @@ export class ApiService implements OnInit {
   loggedInUser:LoggedInUser|null = null;
   @Output()loggedInEvent:EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
 
-  selectFavorite(userId:number,studyId:number){
-    return this.http.post<Study>(this.selectFavoriteURI + `${userId}/${studyId}`,{})
+  selectFavorite(studyId:number){
+    
+    let userId = -1;
+    let user = this.loggedInUser as LoggedInUser;
+    if(user){
+      userId = user.User.id;
+      let favorites = user.Favorites;
+      let study = favorites.filter(x=>x.id === studyId)[0];
+      let magicIndex = favorites.indexOf(study);
+      let length = favorites.length;
+      if(user.Favorites.some(x=>x.id === studyId)){
+        console.log('hit');
+        favorites = favorites.slice(0, (Math.abs(magicIndex)))
+        .concat(favorites.slice(-Math.abs(length - magicIndex )));
+        this.removeFavorite(userId,studyId);
+        this.setUser(user.User)
+        setTimeout(()=>{
+          console.log(this.loggedInUser?.Favorites)
+          this.onComponentLoad();
+        },500)
+      }else{
+
+        this.http.post<Study>(this.selectFavoriteURI + `${studyId}/${userId}`,{}).subscribe();
+        this.setUser(user.User);
+        setTimeout(()=>{
+          console.log(this.loggedInUser?.Favorites)
+          this.onComponentLoad();
+        },500)
+        
+      }
+
+      
+      
+      console.log(favorites);
+    }
+    //return this.http.post<Study>(this.selectFavoriteURI + `${userId}/${studyId}`,{})
   }
   removeFavorite(userId:number,studyId:number){
-    return this.http.post<boolean>(this.removeFavoriteURI + `${userId}/${studyId}`,{})
+    return this.http.post<boolean>(this.removeFavoriteURI + `${studyId}/${userId}`,{}).subscribe((x)=> x)
   }
   getAllUsers(){
     return this.http.get<User[]>(this.userURI,{});
   }
   getLoggedInUserFavorites() {
     let id = -1;
-    if(this.loggedInUser){
-      id = this.loggedInUser.User.id;
-      let user = this.loggedInUser.User;
+    let usery = this.loggedInUser as LoggedInUser;
+    if(usery){
+      let usery = this.loggedInUser as LoggedInUser;
+      console.log('hit')
+      id = usery.User.id;
+      let user = usery.User;
+
+      
       return this.http.get<Study[]>(this.studyURI + `GetAllUserFavorites/${id}`).subscribe((x)=> {
         this.loggedInUser = {
           User:user,
@@ -60,9 +99,18 @@ export class ApiService implements OnInit {
     return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
   }
   getRegisteredUser(user:User){
-    this.registerUser(user);
-    this.getLoggedInUserFavorites();
-    this.onComponentLoad();
+    setTimeout(()=>{
+      this.registerUser(user);
+    },200)
+    setTimeout(()=>{
+      this.getLoggedInUserFavorites();
+    },200)
+    setTimeout(()=>{
+      this.onComponentLoad();
+    },200)
+    
+    
+    
   }
   onLogout() {
     this.loggedInUser = null;
@@ -79,11 +127,20 @@ export class ApiService implements OnInit {
     })
   }
   setUser(currentUser:User){ // sets the currently logged in user in this service so that its globally available to all components, also only used by login component
-    this.getUser(currentUser);
-    this.getLoggedInUserFavorites();
+    setTimeout(()=>{
+      this.getUser(currentUser);
+    },200)
+    setTimeout(()=>{
+      this.getLoggedInUserFavorites();
+    },300)
     setTimeout(()=>{
       return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
-    },500)
+    },300)
+    
+    
+    // setTimeout(()=>{
+      
+    // },500)
   }
   giveCurrentUser(){ // provides the currently logged in user or null to components so they can provide the appropriate functionality, used by any component that needs this data
     return this.loggedInUser;
