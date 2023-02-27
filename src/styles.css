@@ -1,78 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-:root {
-    --dark-teal: #388087;
-    --light-teal: #6FB3B8;
-    --light-blue: #BADFE7;
-    --sea-green: #C2EDCE;
-    --white: #F6F6F2;
-}
-*{
-    font-family:monospace;
-}
-.flex {
-    display: flex;
-}
-.justify-center {
-    justify-content: center;
-}
-.justify-between {
-    justify-content: space-between;
-}
-.justify-evenly {
-    justify-content: space-evenly;
-}
-.align-center {
-    align-items: center;
-}
-.rows {
-    flex-direction: row wrap;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #E4F0FF;
 }
 
-.height-50 {
-    height: 50vh;
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 0px;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 2px;
+    grid-template-areas:
+        "header header header"
+        "nav content side";        
+    height: 100vh;
 }
 
-.column {
-    flex-flow:column wrap;
-}
-.w-100 {
-    width:100%;
-}
-.w-80 {
-    width:80%;
-}
-.w-50 {
-    width: 50%;
+app-header {
+    color: white;
+    font-size: 16px;
+    grid-area: header;
+    text-align: center;
+    background-color: #7e7d7d;
 }
 
-.bdr {
-    border: 1px solid black;
-    border-radius: 3px;
-}
-.m-5 {
-    margin: 5px;
-}
-.p-10 {
-    padding: 10px;
+app-nav {
+    grid-area: nav;
+    margin-left: 0.1rem;
+    background-color: #adadad;
 }
 
-.drk-teal {
-    background-color: var(--dark-teal);
+app-study,
+app-create-study,
+app-user-login,
+app-home {
+    grid-area: content;
+    background-color: #f0ebdb;
+    padding: 20px;
 }
-.lgt-teal {
-    background-color: var(--light-teal);
+
+.bi {
+    float: right;
 }
-.sea-green {
-    background-color: var(--sea-green);
-}
-.lgt-blue {
-    background-color: var(--light-blue);
-}
-.white {
-    background-color: var(--white);
-}
-.bunton {
-    border: 1px solid black;
-    border-radius: 4px;
+
+.form {
+
+    margin: 10px 0;
+    border-radius: 10px;
+
 }

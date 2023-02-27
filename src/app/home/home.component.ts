@@ -9,13 +9,13 @@ import { User } from '../Interfaces/user.interface';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  studies:Study[] = []
-  @Input()loggedInUser:LoggedInUser|null = null;
-  constructor(private api:ApiService){}
+  studies: Study[] = []
+  @Input() loggedInUser: LoggedInUser | null = null;
+  constructor(private api: ApiService) { }
   isLoggedInUser() {
-    if(this.loggedInUser){
+    if (this.loggedInUser) {
       return this.loggedInUser.User.userName;
-    }else{
+    } else {
       return 'user'
     }
   }
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.api.getStudy().subscribe(
       (x) => this.studies = x
     )
-    this.api.loggedInEvent.subscribe((x)=> this.loggedInUser = x as LoggedInUser);
+    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
     this.api.onComponentLoad();
   }
 }

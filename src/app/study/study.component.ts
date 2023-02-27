@@ -42,6 +42,7 @@ export class StudyComponent implements OnInit {
       return;
   }
   ngOnInit(): void {
+
     
   }
 }

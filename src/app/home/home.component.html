@@ -1,5 +1,6 @@
-<app-welcome></app-welcome>
+<main>
 
-<div class="flex rows" *ngFor="let study of studies;index as i">
+  <div *ngFor="let study of studies;index as i">
     <app-study [study]="study"></app-study>
   </div>
+</main>
