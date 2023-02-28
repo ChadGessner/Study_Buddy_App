@@ -1,5 +1,31 @@
+
 <main>
-  <div *ngFor="let study of studies;index as i">
-    <app-study [study]="study"></app-study>
+<div>
+ 
+  <button 
+  *ngIf="loggedInUser"
+  
+  (click)="onFiltered()"
+   >{{filtered ? "View All Questions" : "View only Favorites"}}</button>
+</div>
+
+  
+<div *ngIf="!filtered || !loggedInUser">
+  <div
+  class="flex rows "
+  *ngFor="let study of studies;index as i">
+    
+      <app-study [index]="i" [study]="study"></app-study>
+    
   </div>
+</div>
+<div *ngIf="filtered && loggedInUser">
+  <div
+  class="flex rows "
+  *ngFor="let study of loggedInUser.Favorites;index as i">
+    
+      <app-study (clicked)="fravritClicked($event)" [index]="i" [study]="study"></app-study>
+    
+  </div>
+</div>
 </main>

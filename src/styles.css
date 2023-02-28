@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+
 body {
     margin: 0;
     padding: 0;
@@ -17,6 +18,7 @@ body {
         "header header header"
         "nav content side";        
     height: 100vh;
+
 }
 
 app-header {
@@ -27,10 +29,12 @@ app-header {
     background-color: #7e7d7d;
 }
 
+
 app-nav {
     grid-area: nav;
     margin-left: 0.1rem;
     background-color: #adadad;
+
 }
 
 app-study,

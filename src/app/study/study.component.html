@@ -1,13 +1,17 @@
 <main>
-    <div *ngIf="study !== null" (click)="notIsCanAnswer()">
-        <h4>
+    <div 
+    *ngIf="study !== null" 
+    (click)="notIsCanAnswer($event)">
+        <p>
             {{study.question}}
-            <span id="fravrit-star">
+            <span (click)="fravritClicked()" id="fravrit-star" >
                 <i appFravrit class="bi bi-star-fill"></i>
             </span>
-        </h4>
-        <!--<p><i></i></p>-->
-        <h5 id="answer" *ngIf="isCanHasAnswer">Answer: {{study.answer}}</h5>
-        <hr>
+        </p>
+        <p><i class="bi bi-patch-question-fill"></i></p>
+        <p
+        id="answer" 
+        *ngIf="isCanHasAnswer" >{{study.answer}}</p>
+        
     </div>
 </main>
