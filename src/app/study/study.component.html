@@ -1,12 +1,16 @@
+
 <main>
     <div *ngIf="study !== null" (click)="notIsCanAnswer($event)">
         <h3>
+
             {{study.question}}
             <span (click)="fravritClicked()" id="fravrit-star">
                 <i appFravrit class="bi bi-star-fill"></i>
             </span>
+
         </h3>
         <br>
         <h5 id="answer" *ngIf="isCanHasAnswer">Answer: {{study.answer}}</h5>
+
     </div>
 </main>

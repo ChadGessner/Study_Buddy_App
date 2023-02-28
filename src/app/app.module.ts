@@ -11,7 +11,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateStudyComponent } from './create-study/create-study.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+
 import { NavComponent } from './nav/nav.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { NavComponent } from './nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
