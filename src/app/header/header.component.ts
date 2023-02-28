@@ -7,5 +7,5 @@ import { User } from '../Interfaces/user.interface';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  currentUser:User|null = null;
+  currentUser: User | null = null;
 }

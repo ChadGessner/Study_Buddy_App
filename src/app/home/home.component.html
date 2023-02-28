@@ -1,8 +1,10 @@
-<div class="flex column justify-center align-center p-10 bdr w-100">
-  <app-welcome></app-welcome>
+
+<main>
+<div>
+ 
   <button 
   *ngIf="loggedInUser"
-  class="flex txt-center justify-center bunton sea-green w-80"
+  
   (click)="onFiltered()"
    >{{filtered ? "View All Questions" : "View only Favorites"}}</button>
 </div>
@@ -26,6 +28,4 @@
     
   </div>
 </div>
-
-
-
+</main>

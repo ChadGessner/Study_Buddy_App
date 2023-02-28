@@ -13,6 +13,7 @@ export class StudyComponent implements OnInit {
   @Input()study:Study | null = null;
   isCanHasAnswer:boolean = false;
   isCanHasPicaard:boolean = true;
+
   @Input()loggedInUser:LoggedInUser|null = null;
   @Input()index:number = 0;
   @Output()clicked:EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -66,7 +67,9 @@ export class StudyComponent implements OnInit {
       return;
   }
   ngOnInit(): void {
+
     this.api.loggedInEvent.subscribe((x)=> this.loggedInUser = x);
     this.api.onComponentLoad();
+
   }
 }

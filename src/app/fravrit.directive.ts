@@ -1,9 +1,10 @@
 import {
-   Directive,
-    ElementRef,
-     HostListener,
-      OnInit,
-       Renderer2 } from '@angular/core';
+  Directive,
+  ElementRef,
+  HostListener,
+  OnInit,
+  Renderer2
+} from '@angular/core';
 import { ApiService } from './api.service';
 import { LoggedInUser } from './Interfaces/loggedInUser.interface';
 import { User } from './Interfaces/user.interface';
@@ -12,16 +13,17 @@ import { User } from './Interfaces/user.interface';
   selector: '[appFravrit]'
 })
 export class FravritDirective implements OnInit {
-  loggedInUser:LoggedInUser|null = null;
+  loggedInUser: LoggedInUser | null = null;
   constructor(
-    private render:Renderer2,
-     private el:ElementRef,
-      private api:ApiService
-     ) { }
+    private render: Renderer2,
+    private el: ElementRef,
+    private api: ApiService
+  ) { }
   validateLoginStatus() {
     //this.currentUser = this.api.giveCurrentUser();
     return this.loggedInUser !== null;
   }
+
   setFavorites(){
     if(!this.validateLoginStatus()){
       return;
@@ -75,7 +77,12 @@ export class FravritDirective implements OnInit {
       this.api.onComponentLoad();
       this.setFavorites();
     }
+  }
+  ngOnInit(): void {
+    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
+    this.api.onComponentLoad();
+  }
 }
 
-  
+
 

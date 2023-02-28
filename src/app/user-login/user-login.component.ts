@@ -9,7 +9,9 @@ import { User } from '../Interfaces/user.interface';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
+
 export class UserLoginComponent implements OnInit {
+
   currentUser:User|null = null;
   userName:string = '';
   password:string = '';
@@ -17,49 +19,59 @@ export class UserLoginComponent implements OnInit {
   users:User[] = [];
   @Input()loggedInUser:LoggedInUser|null = null;
   constructor(private api:ApiService){
+
     //this.checkUser();
   }
+
   isUsers() {
-    if(this.users.length === 0){
+    if (this.users.length === 0) {
       return false;
+
     }else{
+
 
       return true;
     }
   }
-  isRegistered(userName:string, password:string){
-    if(!this.isUsers()){
+
+  isRegistered(userName: string, password: string) {
+    if (!this.isUsers()) {
       return undefined;
     }
     return this.users
-    .filter(x=>x.userName === userName && x.password === password)[0];
+      .filter(x => x.userName === userName && x.password === password)[0];
   }
-  getUser(userName:string, password:string) {
-    let user = this.isRegistered(userName,password);
-    if(user){
+
+  getUser(userName: string, password: string) {
+    let user = this.isRegistered(userName, password);
+    if (user) {
       this.api.setUser(user);
     }
     return;
   }
-  addUser(userName:string, password:string) {
-    if(!this.isUsers()){
+
+  addUser(userName: string, password: string) {
+    if (!this.isUsers()) {
       return;
     }
-    if(!this.isRegistered(userName,password))
-    this.api.getRegisteredUser({
-      id: -1,
-      userName: userName,
-      password: password
-    })
+    if (!this.isRegistered(userName, password))
+      this.api.getRegisteredUser({
+        id: -1,
+        userName: userName,
+        password: password
+      })
   }
-  onLogout(){
+
+  onLogout() {
     this.api.onLogout();
     this.loginError=false;
   }
-  onLogin(form:NgForm){
+
+  onLogin(form: NgForm) {
     let name = form.form.value.userName;
     let pass = form.form.value.password;
     this.getUser(name, pass)
+
     // this.isPosted = true;
     setTimeout(()=> {
         if(this.currentUser){
@@ -91,11 +103,12 @@ export class UserLoginComponent implements OnInit {
         }
 
     },1000)
+
   }
 
   ngOnInit(): void {
-    this.api.getAllUsers().subscribe((x)=> this.users = x);
-    this.api.loggedInEvent.subscribe((x)=> this.loggedInUser = x);
+    this.api.getAllUsers().subscribe((x) => this.users = x);
+    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
     this.api.onComponentLoad();
   }
 }

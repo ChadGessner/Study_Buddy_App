@@ -1,3 +1,9 @@
-* {
-    width: 100%;
-}
+input {
+    width:100%;
+    padding:2px;
+    border-radius:10px;
+  }
+
+  label {
+    font-size: 18px;
+  }
