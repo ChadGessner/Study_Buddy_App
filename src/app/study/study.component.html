@@ -1,7 +1,7 @@
 
     <div 
     *ngIf="study !== null" 
-    (click)="notIsCanAnswer($event)" 
+    (click)="notIsCanAnswer($event)"
     class="flex column bdr w-80 p-10 justify-center align-center sea-green  ">
         <p class="txt-center w-100" >
             {{study.question}}
@@ -9,9 +9,12 @@
                 <i appFravrit class="bi bi-star-fill"></i>
             </span>
         </p>
-        <p class="flex drk-teal bdr-radius justify-center align-center shadow w-80" ><i class="bi bi-patch-question-fill"></i></p>
+        <p 
+        
+        class="flex drk-teal bdr-radius justify-center align-center shadow w-80" ><i class="bi bi-patch-question-fill"></i></p>
         <p
         id="answer" 
+        
         *ngIf="isCanHasAnswer" >{{study.answer}}</p>
         
     </div>
