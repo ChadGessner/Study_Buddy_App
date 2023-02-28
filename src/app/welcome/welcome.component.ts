@@ -9,7 +9,7 @@ import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 })
 export class WelcomeComponent implements OnInit {
   @Input() loggedInUser: LoggedInUser | null = null;
-  
+
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 export interface Study {
-    id:number; 
-    question:string ;
-    answer:string ;
+    id: number;
+    question: string;
+    answer: string;
 }

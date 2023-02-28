@@ -7,3 +7,7 @@ input {
 label {
   font-size: 18px;
 }
+
+.Login-error {
+  color: rgb(255, 0, 51);
+}
