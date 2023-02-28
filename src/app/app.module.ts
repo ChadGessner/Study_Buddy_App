@@ -11,7 +11,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateStudyComponent } from './create-study/create-study.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
+import { NavComponent } from './nav/nav.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     UserLoginComponent,
     HomeComponent,
     CreateStudyComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

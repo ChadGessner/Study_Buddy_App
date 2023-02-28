@@ -8,10 +8,12 @@ import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  @Input()loggedInUser:LoggedInUser|null = null;
-  constructor(private api:ApiService){}
+  @Input() loggedInUser: LoggedInUser | null = null;
+
+  constructor(private api: ApiService) { }
+
   ngOnInit(): void {
-    this.api.loggedInEvent.subscribe((x)=> this.loggedInUser = x as LoggedInUser);
+    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
     this.api.onComponentLoad();
   }
 }

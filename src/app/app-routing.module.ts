@@ -5,14 +5,13 @@ import { CreateStudyComponent } from './create-study/create-study.component';
 import { HomeComponent } from './home/home.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 
-const routes: Routes = [{ 
-  path: 'user-login', component: UserLoginComponent
-  
- },{ 
-  path: 'Home', component: HomeComponent
-  },{
-    path: 'create-study', component: CreateStudyComponent
-  }];
+const routes: Routes = [
+  { path: 'user-login', component: UserLoginComponent },
+  { path: 'Home', component: HomeComponent },
+  { path: 'create-study', component: CreateStudyComponent },
+  { path: '', redirectTo: '/Home', pathMatch: 'full' }];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

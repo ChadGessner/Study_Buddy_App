@@ -1,20 +1,16 @@
 
-    <div 
-    *ngIf="study !== null" 
-    (click)="notIsCanAnswer($event)"
-    class="flex column bdr w-80 p-10 justify-center align-center sea-green  ">
-        <p class="txt-center w-100" >
+<main>
+    <div *ngIf="study !== null" (click)="notIsCanAnswer($event)">
+        <h3>
+
             {{study.question}}
-            <span (click)="fravritClicked()" id="fravrit-star" >
+            <span (click)="fravritClicked()" id="fravrit-star">
                 <i appFravrit class="bi bi-star-fill"></i>
             </span>
-        </p>
-        <p 
-        
-        class="flex drk-teal bdr-radius justify-center align-center shadow w-80" ><i class="bi bi-patch-question-fill"></i></p>
-        <p
-        id="answer" 
-        
-        *ngIf="isCanHasAnswer" >{{study.answer}}</p>
-        
+
+        </h3>
+        <br>
+        <h5 id="answer" *ngIf="isCanHasAnswer">Answer: {{study.answer}}</h5>
+
     </div>
+</main>
