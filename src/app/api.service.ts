@@ -12,54 +12,54 @@ import { LoggedInUser } from './Interfaces/loggedInUser.interface';
 export class ApiService implements OnInit {
 
 
-  constructor(private http:HttpClient) { }
-  userURI:string = 'https://localhost:7087/api/User/';
-  loginURI:string = ''
-  selectFavoriteURI:string = 'https://localhost:7087/api/User/AddFavorite/';
-  removeFavoriteURI:string = 'https://localhost:7087/api/User/DeleteFavorite/';
-  studyURI:string = 'https://localhost:7087/api/Study/';
-  loggedInUser:LoggedInUser|null = null;
-  @Output()loggedInEvent:EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
+  constructor(private http: HttpClient) { }
+  userURI: string = 'https://localhost:7087/api/User/';
+  loginURI: string = ''
+  selectFavoriteURI: string = 'https://localhost:7087/api/User/AddFavorite/';
+  removeFavoriteURI: string = 'https://localhost:7087/api/User/DeleteFavorite/';
+  studyURI: string = 'https://localhost:7087/api/Study/';
+  loggedInUser: LoggedInUser | null = null;
+  @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
 
-  selectFavorite(studyId:number){
-    
+  selectFavorite(studyId: number) {
+
     let userId = -1;
     let user = this.loggedInUser as LoggedInUser;
-    if(user){
+    if (user) {
       userId = user.User.id;
       let favorites = user.Favorites;
-      let study = favorites.filter(x=>x.id === studyId)[0];
+      let study = favorites.filter(x => x.id === studyId)[0];
       let magicIndex = favorites.indexOf(study);
       let length = favorites.length;
-      if(user.Favorites.some(x=>x.id === studyId)){
+      if (user.Favorites.some(x => x.id === studyId)) {
         console.log('hit');
         favorites = favorites.slice(0, (Math.abs(magicIndex)))
-        .concat(favorites.slice(-Math.abs(length - magicIndex )));
-        this.removeFavorite(userId,studyId);
+          .concat(favorites.slice(-Math.abs(length - magicIndex)));
+        this.removeFavorite(userId, studyId);
         this.setUser(user.User)
-        setTimeout(()=>{
+        setTimeout(() => {
           console.log(this.loggedInUser?.Favorites)
           this.onComponentLoad();
-        },500)
-      }else{
+        }, 500)
+      } else {
 
-        this.http.post<Study>(this.selectFavoriteURI + `${studyId}/${userId}`,{}).subscribe();
+        this.http.post<Study>(this.selectFavoriteURI + `${studyId}/${userId}`, {}).subscribe();
         this.setUser(user.User);
-        setTimeout(()=>{
+        setTimeout(() => {
           console.log(this.loggedInUser?.Favorites)
           this.onComponentLoad();
-        },500)
-        
+        }, 500)
+
       }
 
-      
-      
+
+
       console.log(favorites);
     }
     //return this.http.post<Study>(this.selectFavoriteURI + `${userId}/${studyId}`,{})
   }
-  removeFavorite(userId:number,studyId:number){
-    return this.http.post<boolean>(this.removeFavoriteURI + `${studyId}/${userId}`,{}).subscribe((x)=> x)
+  removeFavorite(userId: number, studyId: number) {
+    return this.http.post<boolean>(this.removeFavoriteURI + `${studyId}/${userId}`, {}).subscribe((x) => x)
 
   }
 
@@ -71,14 +71,14 @@ export class ApiService implements OnInit {
     let id = -1;
 
     let usery = this.loggedInUser as LoggedInUser;
-    if(usery){
+    if (usery) {
       let usery = this.loggedInUser as LoggedInUser;
       console.log('hit')
       id = usery.User.id;
       let user = usery.User;
 
-      
-      return this.http.get<Study[]>(this.studyURI + `GetAllUserFavorites/${id}`).subscribe((x)=> {
+
+      return this.http.get<Study[]>(this.studyURI + `GetAllUserFavorites/${id}`).subscribe((x) => {
         this.loggedInUser = {
           User: user,
           Favorites: x
@@ -108,16 +108,16 @@ export class ApiService implements OnInit {
     return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
   }
 
-  getRegisteredUser(user:User){
-    setTimeout(()=>{
+  getRegisteredUser(user: User) {
+    setTimeout(() => {
       this.registerUser(user);
-    },200)
-    setTimeout(()=>{
+    }, 200)
+    setTimeout(() => {
       this.getLoggedInUserFavorites();
-    },200)
-    setTimeout(()=>{
+    }, 200)
+    setTimeout(() => {
       this.onComponentLoad();
-    },200)
+    }, 200)
 
   }
 
@@ -137,20 +137,20 @@ export class ApiService implements OnInit {
     })
   }
 
-  setUser(currentUser:User){ // sets the currently logged in user in this service so that its globally available to all components, also only used by login component
-    setTimeout(()=>{
+  setUser(currentUser: User) { // sets the currently logged in user in this service so that its globally available to all components, also only used by login component
+    setTimeout(() => {
       this.getUser(currentUser);
-    },200)
-    setTimeout(()=>{
+    }, 200)
+    setTimeout(() => {
       this.getLoggedInUserFavorites();
-    },300)
-    setTimeout(()=>{
+    }, 300)
+    setTimeout(() => {
       return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
-    },300)
-    
-    
+    }, 300)
+
+
     // setTimeout(()=>{
-      
+
     // },500)
 
   }
