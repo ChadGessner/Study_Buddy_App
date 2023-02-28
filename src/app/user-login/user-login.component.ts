@@ -24,8 +24,6 @@ export class UserLoginComponent implements OnInit {
     if (this.users.length === 0) {
       return false;
     } else {
-
-
       return true;
     }
   }
