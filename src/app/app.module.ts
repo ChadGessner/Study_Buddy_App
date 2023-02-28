@@ -32,7 +32,8 @@ import { NavComponent } from './nav/nav.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
