@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getStudies()
+    this.api.onComponentLoad();
 
   }
 }

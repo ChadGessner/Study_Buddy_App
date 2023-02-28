@@ -13,6 +13,8 @@ import { CreateStudyComponent } from './create-study/create-study.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { NavComponent } from './nav/nav.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { NavComponent } from './nav/nav.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
