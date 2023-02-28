@@ -10,7 +10,6 @@
   <h1 class="Login-error" *ngIf="loginError">Incorrect Login Please Try again</h1>
 </form>
 
-
 <div *ngIf="loggedInUser">
   <h4>{{loggedInUser.User.userName}} is logged in!</h4>
   <button class="bunton" (click)="onLogout()">Logout</button>
