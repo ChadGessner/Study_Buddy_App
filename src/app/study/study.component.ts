@@ -1,11 +1,4 @@
-import {
-   animate,
-    state,
-     style,
-      transition,
-       trigger, 
-        group,
-         keyframes } from '@angular/animations';
+
 import { 
   Component,
    ElementRef,

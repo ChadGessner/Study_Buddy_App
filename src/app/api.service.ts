@@ -12,12 +12,12 @@ export class ApiService implements OnInit {
 
   constructor(private http: HttpClient) { }
   userURI: string = 'https://localhost:7087/api/User/';
-  loginURI: string = ''
+  loginURI: string = '';
   selectFavoriteURI: string = 'https://localhost:7087/api/User/AddFavorite/';
   removeFavoriteURI: string = 'https://localhost:7087/api/User/DeleteFavorite/';
   studyURI: string = 'https://localhost:7087/api/Study/';
   loggedInUser: LoggedInUser | null = null;
-
+  @Output()doorBell:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
 
   selectFavorite(studyId: number) {
@@ -31,7 +31,6 @@ export class ApiService implements OnInit {
       let magicIndex = favorites.indexOf(study);
       let length = favorites.length;
       if (user.Favorites.some(x => x.id === studyId)) {
-        console.log('hit');
         favorites = favorites.slice(0, (Math.abs(magicIndex)))
           .concat(favorites.slice(-Math.abs(length - magicIndex)));
         this.removeFavorite(userId, studyId);
@@ -67,7 +66,6 @@ export class ApiService implements OnInit {
     let usery = this.loggedInUser as LoggedInUser;
     if (usery) {
       let usery = this.loggedInUser as LoggedInUser;
-      console.log('hit')
       id = usery.User.id;
       let user = usery.User;
 
@@ -159,7 +157,12 @@ export class ApiService implements OnInit {
     ).join('%20');
     return this.http.post(this.studyURI + `AddQuestion/${question}/${answer}`, study);
   }
-
+  homeComponentDoorbell(e:MouseEvent) {
+    if(this.loggedInUser){
+      return this.doorBell.emit(e);
+    }
+    return;
+  }
   ngOnInit(): void {
 
   }

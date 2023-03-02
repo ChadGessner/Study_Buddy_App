@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 
@@ -10,9 +10,11 @@ import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 
 export class NavComponent implements OnInit {
   @Input() loggedInUser: LoggedInUser | null = null;
-
+  
   constructor(private api: ApiService) { }
-
+  homeComponentDoorbell(e:MouseEvent){
+    this.api.homeComponentDoorbell(e);
+  }
   ngOnInit(): void {
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
     this.api.onComponentLoad();
