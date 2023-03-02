@@ -7,7 +7,7 @@
   <button class="bunton" type="submit" (click)="onLogin(login)"> Login </button><br><br>
   <button class="bunton" type="button" (click)="newUser(login)"> Create Login </button>
 
-  <h1 class="Login-error" *ngIf="loginError">Incorrect Login Please Try again</h1>
+  <h1 class="Login-error" *ngIf="loginError">{{errorMessage}}</h1>
 </form>
 
 <div *ngIf="loggedInUser">

@@ -11,10 +11,11 @@ import { User } from '../Interfaces/user.interface';
 })
 
 export class UserLoginComponent implements OnInit {
-  currentUser: User | null = null;
+  //currentUser: User | null = null;
   userName: string = '';
   password: string = '';
   loginError: boolean = false;
+  errorMessage:string = ''
   users: User[] = [];
   @Input() loggedInUser: LoggedInUser | null = null;
   constructor(private api: ApiService) {
@@ -29,19 +30,32 @@ export class UserLoginComponent implements OnInit {
     }
   }
 
-  isRegistered(userName: string, password: string) {
+  isRegistered(userName: string):User|undefined {
     if (!this.isUsers()) {
       return undefined;
     }
     return this.users
-      .filter(x => x.userName === userName && x.password === password)[0];
+      .filter(x => x.userName === userName)[0];
   }
-
+  isPassword(user:User, password:string) {
+    
+    return user.password === password;
+  }
   getUser(userName: string, password: string) {
-    let user = this.isRegistered(userName, password);
-    if (user) {
-      this.api.setUser(user);
+    let user = this.isRegistered(userName);
+    if (!user) {
+      this.loginError = true;
+      this.postErrorMessage("That username does not exist!");
+      return;
+      
+    }else if( !this.isPassword(user, password)){
+      this.loginError = true;
+      this.postErrorMessage("Incorrect Password!");
+      return;
     }
+    console.log("User logged in I guess");
+    
+    this.api.setUser(user);
     return;
   }
 
@@ -49,12 +63,12 @@ export class UserLoginComponent implements OnInit {
     if (!this.isUsers()) {
       return;
     }
-    if (!this.isRegistered(userName, password))
-      this.api.getRegisteredUser({
-        id: -1,
-        userName: userName,
-        password: password
-      })
+    
+    this.api.getRegisteredUser({
+      id: -1,
+      userName: userName,
+      password: password
+    })
   }
 
   onLogout() {
@@ -65,32 +79,34 @@ export class UserLoginComponent implements OnInit {
   onLogin(form: NgForm) {
     let name = form.form.value.userName;
     let pass = form.form.value.password;
-    this.getUser(name, pass)
+    if(this.isRegistered(name)) {
+      setTimeout(() => {
+        this.getUser(name, pass)
     // this.isPosted = true;
-    setTimeout(() => {
-      if (this.currentUser) {
-        console.log(this.currentUser)
-      }
-      else {
-        this.loginError = true;
-      }
-      if (this.currentUser) {
-        this.api.setUser(this.currentUser) // passing the currently logged in user back to service so it is globally available, has to be done this way...
-      }
-    }, 1000)
+    },1000)
   }
-
+  }
+  postErrorMessage(message:string){
+    this.errorMessage = message;
+  }
   newUser(form: NgForm) {
     let name = form.form.value.userName;
     let pass = form.form.value.password;
+    let user = this.isRegistered(name);
+    if(user){
+      this.loginError = true;
+      this.postErrorMessage("That username already exists!");
+      return;
+    }
     this.addUser(name, pass)
     setTimeout(() => {
-      if (this.currentUser) {
-        console.log(this.currentUser)
-      }
-      if (this.currentUser) {
-        this.api.setUser(this.currentUser) // passing the currently logged in user back to service so it is globally available, has to be done this way...
-      }
+      
+      this.api.setUser({
+        id: -1,
+        userName: name,
+        password: pass
+      }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
+      
     }, 1000)
   }
 

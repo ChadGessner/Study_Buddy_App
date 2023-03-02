@@ -4,5 +4,10 @@
     <li><a routerLink="Home">Home</a></li>
     <li><a routerLink="create-study">Add New Question</a></li>
     <li><a routerLink="user-login">User Login</a></li>
+    <li 
+    *ngIf="getPathName() === 'Home'" >
+    <a [ngStyle]="{'color' : 'white'}" (click)="showAnswers($event)">
+    {{showAnswersMessage()}}</a></li>
+    
   </ul>
 </nav>

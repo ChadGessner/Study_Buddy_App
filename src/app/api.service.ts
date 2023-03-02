@@ -4,6 +4,7 @@ import { Study } from 'src/app/Interfaces/study.interface'
 import { User } from './Interfaces/user.interface';
 import { Observable } from 'rxjs';
 import { LoggedInUser } from './Interfaces/loggedInUser.interface';
+import { TestRepoService } from './test-repo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class ApiService implements OnInit {
   selectFavoriteURI: string = 'https://localhost:7087/api/User/AddFavorite/';
   removeFavoriteURI: string = 'https://localhost:7087/api/User/DeleteFavorite/';
   studyURI: string = 'https://localhost:7087/api/Study/';
+  bounceFromNavToStudy:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   loggedInUser: LoggedInUser | null = null;
   @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
 
@@ -172,8 +174,11 @@ export class ApiService implements OnInit {
     ).join('%20');
     return this.http.post(this.studyURI + `AddQuestion/${question}/${answer}`, study);
   }
-
+  eventsFromNavToStudy(e:MouseEvent) {
+    return this.bounceFromNavToStudy.emit(e);
+  }
+  
   ngOnInit(): void {
-
+    //this.repo.isLoaded.subscribe()
   }
 }

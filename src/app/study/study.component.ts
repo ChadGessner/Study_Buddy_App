@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, HostListener, EventEmitter, Output } from '@angular/core';
+import {
+   Component,
+    ElementRef,
+     Input,
+      OnInit,
+       Renderer2,
+        HostListener,
+         EventEmitter,
+          Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
@@ -26,9 +34,9 @@ import {
       transition('show => hidden', animate(1000)),
       transition('hidden => show', animate(1000)),
       
-    ]  )
+    ]),
   ]
-})
+ })
 export class StudyComponent implements OnInit {
   answerState = 'hidden';
   @Input() study: Study | null = null;
@@ -38,19 +46,14 @@ export class StudyComponent implements OnInit {
   @Input() index: number = 0;
   @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
   
-  constructor(private api: ApiService, private render: Renderer2, el: ElementRef) { }
+  constructor(
+    private api: ApiService,
+     private render: Renderer2,
+      private el: ElementRef) { }
 
-  notIsCanAnswer(e: MouseEvent) {
-
-    
-    
-    
-  }
   answerTransition(e:MouseEvent) {
-
     this.isCanHasAnswer = !this.isCanHasAnswer;
     this.answerState = this.isCanHasAnswer ? 'show' : 'hidden';
-    
   }
 
   fravritClicked(e:MouseEvent) {
@@ -60,27 +63,19 @@ export class StudyComponent implements OnInit {
 
       return this.clicked.emit(true);
   }
-
-  fourLights(answer: string | null | undefined) {
-    let url = "https://i.imgur.com/mKtwyFr.jpg";
-    let node = document.getElementsByTagName('h1')[0]
-    if (node) {
-      node.innerText = ''
-      let img = this.render.createElement('img');
-      this.render.appendChild(
-        node,
-        img
-      )
-      this.render.setStyle(img, 'width', '200px')
-      this.render.setStyle(img, 'height', '200px')
-      this.render.setAttribute(img, 'src', url);
-      this.isCanHasPicaard = false;
+  isStar(e:HTMLElement) {
+    let span = e as HTMLElement;
+    let parent = span.parentElement as HTMLElement;
+    let parentParent = parent.parentElement as HTMLElement;
+    if(parentParent.innerText.toLowerCase().trim() !== this.study?.question.toLowerCase().trim()){
+      return false;
     }
-    return;
+    return true;
   }
-
+    
   ngOnInit(): void {
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
+    this.api.bounceFromNavToStudy.subscribe(x=> this.answerTransition(x) )
     this.api.onComponentLoad();
   }
 }

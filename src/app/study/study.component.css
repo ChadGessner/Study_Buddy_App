@@ -8,14 +8,24 @@ h5 {
     justify-content: center;
     align-items: center;
     height: 50px;
-    background-color: black;
+    text-shadow: 4px 2px black;
+    
     color: white;
 }
-
+#fravrit-star {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    position: absolute;
+    right: 300px;
+    border-radius: 50%;
+}
 .answer {
     /* border-top: 1px solid white;
     border-right: 1px solid white; */
-    border: 1px solid  white;
+    background-color: salmon;
     padding: 5px;
     text-align: center
 }
