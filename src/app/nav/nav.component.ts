@@ -1,13 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css']
+  selector: 'app-nav',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.css']
 })
-export class WelcomeComponent implements OnInit {
+
+export class NavComponent implements OnInit {
   @Input() loggedInUser: LoggedInUser | null = null;
 
   constructor(private api: ApiService) { }
@@ -17,3 +18,5 @@ export class WelcomeComponent implements OnInit {
     this.api.onComponentLoad();
   }
 }
+
+

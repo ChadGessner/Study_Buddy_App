@@ -1,13 +1,23 @@
-/* :root {
-    --dark-teal: #388087;
-    --light-teal: #6FB3B8;
-    --light-blue: #BADFE7;
-    --sea-green: #C2EDCE;
-    --white: #F6F6F2;
-} */
-.o {
-    min-height: 30px;
-    min-width: 30px;
-    background-color: var(--light-teal);
-    box-shadow: 4px 1px 4px 1px black
+
+h5 {
+    padding: 25px;
+    text-indent: 50px;
+}
+.answer-container {
+    display:flex;
+    flex-direction:row wrap;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: black;
+    color: white;
+}
+
+.answer {
+    /* border-top: 1px solid white;
+    border-right: 1px solid white; */
+    border: 1px solid  white;
+    padding: 5px;
+    text-align: center
+
 }

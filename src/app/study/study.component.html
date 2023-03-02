@@ -1,24 +1,18 @@
 
-    <div 
-    *ngIf="study !== null" 
-    
-    class="flex column bdr w-80 p-10 justify-center align-center sea-green  ">
-        <p class="txt-center w-100" >
+<main>
+    <div *ngIf="study !== null">
+        <h3>
             {{study.question}}
-            <span   id="fravrit-star"  >
-                <i (click)="fravritClicked($event)"  appFravrit class="bi bi-star-fill"></i>
+            <span id="fravrit-star">
+                <i (click)="fravritClicked($event)" appFravrit class="bi bi-star-fill"></i>
             </span>
-        </p>
-        <p 
-        (click)="notIsCanAnswer($event)"
-        class="flex drk-teal bdr-radius justify-center align-center shadow w-80" ><i class="bi bi-patch-question-fill"></i></p>
-        <div 
-        class="o"
-        [@answerState]="answerState" 
-        
-         >
-            <p
-            id="answer" 
-             >{{study.answer}}</p>
+        </h3>
+        <button (click)="notIsCanAnswer($event)" (click)="answerTransition($event)" class="bunton">
+            <i class="bi bi-patch-question-fill"></i> Show Answer</button>
+        <br>
+        <div class="answer-container" [@answerState]="answerState">
+            <h5 class="answer" id="answer">{{study.answer}}</h5>
+
         </div>
     </div>
+</main>

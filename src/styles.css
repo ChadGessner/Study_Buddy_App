@@ -1,101 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-:root {
-    --dark-teal: #388087;
-    --light-teal: #6FB3B8;
-    --light-blue: #BADFE7;
-    --sea-green: #C2EDCE;
-    --white: #F6F6F2;
-}
-*{
-    font-family:monospace;
-}
-.no-wrap {
-    flex-wrap:nowrap;
-}
-.flex {
-    display: flex;
-}
-.justify-center {
-    justify-content: center;
-}
-.justify-between {
-    justify-content: space-between;
-}
-.justify-evenly {
-    justify-content: space-evenly;
-}
-.align-center {
-    align-items: center;
-}
-.align-start {
-    align-items: flex-start;
-}
-.align-end {
-    align-items: flex-end;
-}
-.rows {
-    flex-direction: row wrap;
-}
-.w-20 {
-    width:20%;
-    max-width:20%;
-}
-.h-10 {
-    height: 10vh;
-    max-height: 10vh;
-}
-.height-50 {
-    height: 100vh;
-}
-.bdr-radius {
-    border-radius: 4px 4px 4px 4px;
-}
-.shadow {
-    box-shadow: 4px black, 2px pink, 3px red, 2px red;
-}
-.column {
-    flex-flow:column ;
-}
-.w-100 {
-    width:100%;
-}
-.w-80 {
-    width:80%;
-}
-.w-50 {
-    width: 50%;
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #E4F0FF;
 }
 
-.bdr {
-    border: 1px solid black;
-    border-radius: 3px;
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr 0px;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 2px;
+    grid-template-areas:
+        "header header header"
+        "nav content side";        
+    height: 100vh;
+
 }
-.m-5 {
-    margin: 5px;
-}
-.p-10 {
-    padding: 10px;
-}
-.txt-center {
+
+app-header {
+    color: white;
+    font-size: 16px;
+    grid-area: header;
     text-align: center;
+    background-color: #7e7d7d;
 }
-.drk-teal {
-    background-color: var(--dark-teal);
+
+
+app-nav {
+    grid-area: nav;
+    margin-left: 0.1rem;
+    background-color: #adadad;
+
 }
-.lgt-teal {
-    background-color: var(--light-teal);
+
+app-study,
+app-create-study,
+app-user-login,
+app-user-logout,
+app-home {
+    grid-area: content;
+    background-color: #f0ebdb;
+    padding: 20px;
 }
-.sea-green {
-    background-color: var(--sea-green);
+
+.bi {
+    float: right;
 }
-.lgt-blue {
-    background-color: var(--light-blue);
+
+.form {
+
+    margin: 10px 0;
+    border-radius: 10px;
+
 }
-.white {
-    background-color: var(--white);
-}
+
 .bunton {
-    border: 1px solid black;
+    border: none;
     border-radius: 4px;
+    color: white;
+    background-color: pink;
+    box-shadow: 1px 0 1px 0 grey;
+}
+.bunton::click {
+    transform: translateX(2px)
 }

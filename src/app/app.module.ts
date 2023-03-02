@@ -11,7 +11,12 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { HomeComponent } from './home/home.component';
 import { CreateStudyComponent } from './create-study/create-study.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NavComponent } from './nav/nav.component';
+import { UserLogoutComponent } from './user-logout/user-logout.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,14 +26,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserLoginComponent,
     HomeComponent,
     CreateStudyComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NavComponent,
+    UserLogoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+
+    BrowserAnimationsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
