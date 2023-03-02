@@ -40,6 +40,7 @@ app-nav {
 app-study,
 app-create-study,
 app-user-login,
+app-user-logout,
 app-home {
     grid-area: content;
     background-color: #f0ebdb;

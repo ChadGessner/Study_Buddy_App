@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
-import { User } from '../Interfaces/user.interface';
+
 
 @Component({
   selector: 'app-home',

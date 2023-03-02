@@ -2,7 +2,6 @@ import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Study } from 'src/app/Interfaces/study.interface'
 import { User } from './Interfaces/user.interface';
-import { Observable } from 'rxjs';
 import { LoggedInUser } from './Interfaces/loggedInUser.interface';
 
 @Injectable({
@@ -11,7 +10,6 @@ import { LoggedInUser } from './Interfaces/loggedInUser.interface';
 
 export class ApiService implements OnInit {
 
-
   constructor(private http: HttpClient) { }
   userURI: string = 'https://localhost:7087/api/User/';
   loginURI: string = ''
@@ -19,6 +17,7 @@ export class ApiService implements OnInit {
   removeFavoriteURI: string = 'https://localhost:7087/api/User/DeleteFavorite/';
   studyURI: string = 'https://localhost:7087/api/Study/';
   loggedInUser: LoggedInUser | null = null;
+
   @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
 
   selectFavorite(studyId: number) {
@@ -49,18 +48,13 @@ export class ApiService implements OnInit {
           console.log(this.loggedInUser?.Favorites)
           this.onComponentLoad();
         }, 500)
-
       }
-
-
-
       console.log(favorites);
     }
     //return this.http.post<Study>(this.selectFavoriteURI + `${userId}/${studyId}`,{})
   }
   removeFavorite(userId: number, studyId: number) {
     return this.http.post<boolean>(this.removeFavoriteURI + `${studyId}/${userId}`, {}).subscribe((x) => x)
-
   }
 
   getAllUsers() {
@@ -76,7 +70,6 @@ export class ApiService implements OnInit {
       console.log('hit')
       id = usery.User.id;
       let user = usery.User;
-
 
       return this.http.get<Study[]>(this.studyURI + `GetAllUserFavorites/${id}`).subscribe((x) => {
         this.loggedInUser = {
@@ -147,12 +140,6 @@ export class ApiService implements OnInit {
     setTimeout(() => {
       return this.loggedInEvent.emit(this.giveCurrentUser() as LoggedInUser);
     }, 300)
-
-
-    // setTimeout(()=>{
-
-    // },500)
-
   }
 
   giveCurrentUser() { // provides the currently logged in user or null to components so they can provide the appropriate functionality, used by any component that needs this data
