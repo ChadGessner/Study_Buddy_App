@@ -11,6 +11,9 @@ import { User } from '../Interfaces/user.interface';
 })
 
 export class UserLoginComponent implements OnInit {
+  static onLogout() {
+    throw new Error('Method not implemented.');
+  }
   currentUser: User | null = null;
   userName: string = '';
   password: string = '';

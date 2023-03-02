@@ -3,6 +3,7 @@
   <ul>
     <li><a routerLink="Home">Home</a></li>
     <li><a routerLink="create-study">Add New Question</a></li>
-    <li><a routerLink="user-login">User Login</a></li>
+    <li *ngIf="!loggedInUser"><a routerLink="user-login">User Login</a></li>
+    <li *ngIf="loggedInUser"><a routerLink="user-logout">Log Out</a></li>
   </ul>
 </nav>

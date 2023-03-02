@@ -2,12 +2,13 @@ import { Component, ElementRef, Input, OnInit, Renderer2, HostListener, EventEmi
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
-import { 
+import {
   animate,
-   state,
-    style,
-     transition,
-      trigger } from '@angular/animations';
+  state,
+  style,
+  transition,
+  trigger
+} from '@angular/animations';
 
 @Component({
   selector: 'app-study',
@@ -16,17 +17,17 @@ import {
   animations: [
     trigger('answerState', [
       state('show', style({
-        'opacity' : '1',
-        'transform' : 'translateX(0)'
+        'opacity': '1',
+        'transform': 'translateX(0)'
       })),
       state('hidden', style({
-        'opacity' : '0',
-        'transform' : 'translateX(1200px)'
+        'opacity': '0',
+        'transform': 'translateX(1200px)'
       })),
       transition('show => hidden', animate(1000)),
       transition('hidden => show', animate(1000)),
-      
-    ]  )
+
+    ])
   ]
 })
 export class StudyComponent implements OnInit {
@@ -37,28 +38,25 @@ export class StudyComponent implements OnInit {
   @Input() loggedInUser: LoggedInUser | null = null;
   @Input() index: number = 0;
   @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
-  
+
   constructor(private api: ApiService, private render: Renderer2, el: ElementRef) { }
 
   notIsCanAnswer(e: MouseEvent) {
 
-    
-    
-    
   }
-  answerTransition(e:MouseEvent) {
+  answerTransition(e: MouseEvent) {
 
     this.isCanHasAnswer = !this.isCanHasAnswer;
     this.answerState = this.isCanHasAnswer ? 'show' : 'hidden';
-    
+
   }
 
-  fravritClicked(e:MouseEvent) {
+  fravritClicked(e: MouseEvent) {
     this.study = this.study as Study
-      this.api.selectFavorite(this.study.id);
-      this.api.onComponentLoad();
+    this.api.selectFavorite(this.study.id);
+    this.api.onComponentLoad();
 
-      return this.clicked.emit(true);
+    return this.clicked.emit(true);
   }
 
   fourLights(answer: string | null | undefined) {

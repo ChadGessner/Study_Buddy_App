@@ -18,9 +18,10 @@ export class AppComponent implements OnInit {
   truthy: boolean = false;
   isHome: boolean = this.getPathName() === 'Home';
   currentUser: User | null = null;
-  constructor(private api: ApiService) { }
-  getUser() {
 
+  constructor(private api: ApiService) { }
+
+  getUser() {
   }
 
   getPathName() {
