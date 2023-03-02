@@ -2,14 +2,35 @@ import { Component, ElementRef, Input, OnInit, Renderer2, HostListener, EventEmi
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
-import { User } from '../Interfaces/user.interface';
+import { 
+  animate,
+   state,
+    style,
+     transition,
+      trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
-  styleUrls: ['./study.component.css']
+  styleUrls: ['./study.component.css'],
+  animations: [
+    trigger('answerState', [
+      state('show', style({
+        'opacity' : '1',
+        'transform' : 'translateX(0)'
+      })),
+      state('hidden', style({
+        'opacity' : '0',
+        'transform' : 'translateX(1200px)'
+      })),
+      transition('show => hidden', animate(1000)),
+      transition('hidden => show', animate(1000)),
+      
+    ]  )
+  ]
 })
 export class StudyComponent implements OnInit {
+  answerState = 'hidden';
   @Input() study: Study | null = null;
   isCanHasAnswer: boolean = false;
   isCanHasPicaard: boolean = true;
@@ -20,29 +41,24 @@ export class StudyComponent implements OnInit {
   constructor(private api: ApiService, private render: Renderer2, el: ElementRef) { }
 
   notIsCanAnswer(e: MouseEvent) {
-    let target = e.target as HTMLElement
-    if (target && target.classList.value === 'bi bi-star-fill') {
-      let parent = target.parentElement?.parentElement as HTMLHeadingElement;
-      let question = parent.innerText.trim().toLowerCase();
 
-      if (this.loggedInUser && this.study) {
-        let id = this.study.id
-        this.api.selectFavorite(id);
-      }
-      return;
-    }
-    if (this.study && !this.isCanHasAnswer && this.study.answer === 'THERE ARE FOUR LIGHTS!') {
-            //console.log(this.isCanHasPicaard);
-      this.fourLights(this.study.answer)
-    }
+    
+    
+    
+  }
+  answerTransition(e:MouseEvent) {
+
     this.isCanHasAnswer = !this.isCanHasAnswer;
+    this.answerState = this.isCanHasAnswer ? 'show' : 'hidden';
+    
   }
 
-  fravritClicked() {
-    if (this.loggedInUser) {
+  fravritClicked(e:MouseEvent) {
+    this.study = this.study as Study
+      this.api.selectFavorite(this.study.id);
+      this.api.onComponentLoad();
+
       return this.clicked.emit(true);
-    }
-    return;
   }
 
   fourLights(answer: string | null | undefined) {

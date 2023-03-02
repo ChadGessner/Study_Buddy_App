@@ -35,11 +35,11 @@ namespace StudyBuddy.Controllers
       return _db.AddStudy(question, answer);
     }
 
-    //[HttpPut("{studyId}/{userId}")]
-    //public Study PutFavorite(int studyId, int userId)
-    //{
-    //  return _db.FavoriteStudy(studyId, userId);
-    //}
+    [HttpPost("DeleteStudy/{studyId}")]
+    public Study DeleteStudy(int studyId)
+    {
+      return _db.RemoveStudy(studyId);
+    }
 
     [HttpPost("RemoveFavorite/{studyId}/{userId}")]
     public void Delete(int studyId, int userId)
