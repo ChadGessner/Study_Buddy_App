@@ -1,4 +1,13 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, HostListener, EventEmitter, Output } from '@angular/core';
+
+import { 
+  Component,
+   ElementRef,
+    Input,
+     OnInit,
+      Renderer2,
+       HostListener,
+        EventEmitter,
+         Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
@@ -15,6 +24,7 @@ import {
   templateUrl: './study.component.html',
   styleUrls: ['./study.component.css'],
   animations: [
+
     trigger('answerState', [
       state('show', style({
         'opacity': '1',
@@ -27,11 +37,13 @@ import {
       transition('show => hidden', animate(1000)),
       transition('hidden => show', animate(1000)),
 
+
     ])
   ]
 })
 export class StudyComponent implements OnInit {
   answerState = 'hidden';
+
   @Input() study: Study | null = null;
   isCanHasAnswer: boolean = false;
   isCanHasPicaard: boolean = true;
@@ -75,6 +87,7 @@ export class StudyComponent implements OnInit {
       this.isCanHasPicaard = false;
     }
     return;
+
   }
 
   ngOnInit(): void {

@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
     this.api.getStudy().subscribe(
       (x) => this.studies = x
     )
+    this.api.doorBell.subscribe(x => this.filtered = false);
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
     this.api.onComponentLoad();
   }
