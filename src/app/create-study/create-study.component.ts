@@ -12,6 +12,8 @@ import { User } from '../Interfaces/user.interface';
 export class CreateStudyComponent implements OnInit {
   studies: Study[] = [];
   currentUser: User | null = null;
+  errorMessage = '';
+  successMessage='';
   constructor(private api: ApiService) { }
   postStudy(newStudy: NgForm) {
     let study: Study = {
@@ -19,11 +21,23 @@ export class CreateStudyComponent implements OnInit {
       question: newStudy.form.value.question,
       answer: newStudy.form.value.answer
     }
+    if(this.studies.filter(x=> x.question === study.question && x.answer === study.answer)[0]){
+      this.errorMessage = 'that Q&A Combo already exists'
+      this.successMessage="";
+    }
+    else{
     this.api.createStudy(study).subscribe(
-      (x) => this.studies.push(x as Study)
-    )
+      response => {
+        this.successMessage = 'Data added successfully!';
+        this.errorMessage="";
+      },
+    );
+    }
     this.getStudies();
+
+
   }
+
   getStudies() {
     this.api.getStudy()
       .subscribe(
