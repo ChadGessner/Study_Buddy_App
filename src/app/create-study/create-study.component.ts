@@ -22,20 +22,25 @@ export class CreateStudyComponent implements OnInit {
       answer: newStudy.form.value.answer
     }
     if(this.studies.filter(x=> x.question === study.question && x.answer === study.answer)[0]){
-      this.errorMessage = 'that Q&A Combo already exists'
+      newStudy.resetForm()
+      this.errorMessage = 'Question already exists!'
       this.successMessage="";
-    }
-    else{
+    }else{
     this.api.createStudy(study).subscribe(
       response => {
-        this.successMessage = 'Data added successfully!';
-        this.errorMessage="";
-      },
-    );
+        if(response){
+          console.log(response)
+          this.successMessage = 'Data added successfully!';
+          this.errorMessage="";
+          newStudy.resetForm()
+          
+        // }else{
+        //   this.errorMessage = "BRRRRRRRRRRRRRRRRRRRRRRRRR";
+        }
+        
+      },);
     }
     this.getStudies();
-
-
   }
 
   getStudies() {
