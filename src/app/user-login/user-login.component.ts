@@ -126,17 +126,11 @@ export class UserLoginComponent implements OnInit {
         }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
 
       }, 1000)
-    
-
-        
-      
-    
   }
   
   ngOnInit(): void {
     this.api.getAllUsers().subscribe((x) => this.users = x);
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
-    this.api.onComponentLoad();
   }
 }
 

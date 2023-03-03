@@ -53,9 +53,6 @@ export class StudyComponent implements OnInit {
 
   constructor(private api: ApiService, private render: Renderer2, el: ElementRef) { }
 
-  notIsCanAnswer(e: MouseEvent) {
-
-  }
   answerTransition(e: MouseEvent) {
 
     this.isCanHasAnswer = !this.isCanHasAnswer;
@@ -66,28 +63,7 @@ export class StudyComponent implements OnInit {
   fravritClicked(e: MouseEvent) {
     this.study = this.study as Study
     this.api.selectFavorite(this.study.id);
-    this.api.onComponentLoad();
-
     return this.clicked.emit(true);
-  }
-
-  fourLights(answer: string | null | undefined) {
-    let url = "https://i.imgur.com/mKtwyFr.jpg";
-    let node = document.getElementsByTagName('h1')[0]
-    if (node) {
-      node.innerText = ''
-      let img = this.render.createElement('img');
-      this.render.appendChild(
-        node,
-        img
-      )
-      this.render.setStyle(img, 'width', '200px')
-      this.render.setStyle(img, 'height', '200px')
-      this.render.setAttribute(img, 'src', url);
-      this.isCanHasPicaard = false;
-    }
-    return;
-
   }
 
   ngOnInit(): void {
