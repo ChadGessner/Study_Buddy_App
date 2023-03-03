@@ -53,16 +53,12 @@ namespace StudyBuddy.DAL
       }
       return false;
     }
-    public User GetUser(string userName, string password)
+    public User GetUser(string userName)
     {
       User user = GetUsers()
         .FirstOrDefault(x => x.UserName
         .ToLower()
         .Trim() == userName
-        .ToLower()
-        .Trim() && x.Password
-        .ToLower()
-        .Trim() == password
         .ToLower()
         .Trim());
       if (user == null)
@@ -83,7 +79,7 @@ namespace StudyBuddy.DAL
     }
     public User AddUser(string userName, string password)
     {
-      User toAdd = GetUser(userName, password);
+      User toAdd = GetUser(userName);
       if(toAdd != null)
       {
         return null;
@@ -94,7 +90,7 @@ namespace StudyBuddy.DAL
         Password = password
       });
       SaveChanges();
-      return GetUser(userName, password);
+      return GetUser(userName);
     }
     public Study FavoriteStudy(int studyId, int userId)
     {
