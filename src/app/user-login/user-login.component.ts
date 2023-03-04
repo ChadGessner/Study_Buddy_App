@@ -103,7 +103,6 @@ export class UserLoginComponent implements OnInit {
       this.clearForm(form)
       this.loginError = true;
       this.errorMessage = 'That data is not in the correct format...'
-      
       return;
     }
     if(this.users.filter(x=> x.userName === name)[0]){
@@ -117,15 +116,11 @@ export class UserLoginComponent implements OnInit {
       userName:name,
       password:pass
     })
-      setTimeout(()=>{
-
-        this.api.setUser({
-          id:-1,
-          userName:name,
-          password:pass
-        }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
-
-      }, 1000)
+    this.api.setUser({
+      id:-1,
+      userName:name,
+      password:pass
+    }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
   }
   
   ngOnInit(): void {
