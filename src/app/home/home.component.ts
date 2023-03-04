@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
 import { Study } from '../Interfaces/study.interface';
@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   studies: Study[] = []
   filtered: boolean = false;
   @Input() loggedInUser: LoggedInUser | null = null;
+  isShowAnswers:EventEmitter<boolean> = new EventEmitter<boolean>();
+  answers:boolean = false;
   constructor(private api: ApiService) { }
   isLoggedInUser() {
     if (this.loggedInUser) {
@@ -23,7 +25,11 @@ export class HomeComponent implements OnInit {
       return 'user'
     }
   }
-
+  showAnswers(e:MouseEvent) {
+    this.answers = !this.answers;
+    return this.api.homeComponentShowAnswersClick(this.answers);
+  }
+  
   onFiltered() {
     this.filtered = !this.filtered;
   }
@@ -34,6 +40,6 @@ export class HomeComponent implements OnInit {
     )
     this.api.doorBell.subscribe(x => this.filtered = false);
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
-    this.api.onComponentLoad();
+    //this.api.onComponentLoad();
   }
 }

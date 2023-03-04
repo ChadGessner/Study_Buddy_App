@@ -37,16 +37,14 @@ import {
       transition('show => hidden', animate(1000)),
       transition('hidden => show', animate(1000)),
 
-
     ])
   ]
 })
 export class StudyComponent implements OnInit {
   answerState = 'hidden';
-
   @Input() study: Study | null = null;
   isCanHasAnswer: boolean = false;
-  isCanHasPicaard: boolean = true;
+  @Input()showAll: boolean = true;
   @Input() loggedInUser: LoggedInUser | null = null;
   @Input() index: number = 0;
   @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -54,12 +52,19 @@ export class StudyComponent implements OnInit {
   constructor(private api: ApiService, private render: Renderer2, el: ElementRef) { }
 
   answerTransition(e: MouseEvent) {
-
     this.isCanHasAnswer = !this.isCanHasAnswer;
     this.answerState = this.isCanHasAnswer ? 'show' : 'hidden';
 
   }
-
+  onShowAll() {
+    if(this.showAll){
+      this.isCanHasAnswer = true;
+      this.answerState = 'show';
+    }else{
+      this.isCanHasAnswer = this.isCanHasAnswer;
+      this.answerState = this.answerState;
+    }
+  }
   fravritClicked(e: MouseEvent) {
     this.study = this.study as Study
     this.api.selectFavorite(this.study.id);
@@ -67,7 +72,19 @@ export class StudyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
-    this.api.onComponentLoad();
+    this.api.loggedInEvent
+    .subscribe((x) => this.loggedInUser = x);
+
+    this.api.showAnswersEvent
+    .subscribe(
+      (x)=>{
+        if(x) {
+          this.isCanHasAnswer = true;
+          this.answerState = 'show';
+        }else{
+          this.isCanHasAnswer = false;
+          this.answerState = 'hidden';
+        }
+      })
   }
 }

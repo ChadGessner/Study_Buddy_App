@@ -19,7 +19,7 @@ export class ApiService {
   loggedInUser: LoggedInUser | null = null;
   @Output()doorBell:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
-
+  @Output() showAnswersEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
   selectFavorite(studyId: number) {
 
     let userId = -1;
@@ -34,22 +34,28 @@ export class ApiService {
         favorites = favorites.slice(0, (Math.abs(magicIndex)))
           .concat(favorites.slice(-Math.abs(length - magicIndex)));
         this.removeFavorite(userId, studyId);
-        this.setUser(user.User)
-        this.onComponentLoad();
+        
+        
       } else {
-        this.http.post<Study>(this.selectFavoriteURI + `${studyId}/${userId}`, {}).subscribe();
-        this.setUser(user.User);
-        this.onComponentLoad();
+        this.http.post<Study>(this.selectFavoriteURI + `${studyId}/${userId}`, {}).subscribe(
+          (x)=>{
+            if(x){
+              this.setUser(user.User)
+              return this.onComponentLoad()
+            }
+      });
       }
     }
   }
   removeFavorite(userId: number, studyId: number) {
     return this.http.post<boolean>(this.removeFavoriteURI + `${studyId}/${userId}`, {})
     .subscribe(
-      (x) => 
-        this.onComponentLoad()
-      
-      )
+      (x) => {
+        if(x) {
+          this.setUser(this.giveCurrentUser().User)
+          return this.onComponentLoad();
+        }
+    })
   }
 
   getAllUsers() {
@@ -124,7 +130,7 @@ export class ApiService {
   }
 
   giveCurrentUser() { // provides the currently logged in user or null to components so they can provide the appropriate functionality, used by any component that needs this data
-    return this.loggedInUser;
+    return this.loggedInUser as LoggedInUser;
   }
 
   getStudy() {
@@ -139,6 +145,9 @@ export class ApiService {
       ' '
     ).join('%20');
     return this.http.post(this.studyURI + `AddQuestion/${question}/${answer}`, study);
+  }
+  homeComponentShowAnswersClick(e:boolean) {
+    return this.showAnswersEvent.emit(e);
   }
   homeComponentDoorbell(e:MouseEvent) {
     if(this.loggedInUser){
