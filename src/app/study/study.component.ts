@@ -34,8 +34,8 @@ import {
         'opacity': '0',
         'transform': 'translateX(1200px)'
       })),
-      transition('show => hidden', animate(1000)),
-      transition('hidden => show', animate(1000)),
+      transition('show => hidden', animate(400)),
+      transition('hidden => show', animate(400)),
 
     ])
   ]
