@@ -34,64 +34,57 @@ import {
         'opacity': '0',
         'transform': 'translateX(1200px)'
       })),
-      transition('show => hidden', animate(1000)),
-      transition('hidden => show', animate(1000)),
-
+      transition('show => hidden', animate(400)),
+      transition('hidden => show', animate(400)),
 
     ])
   ]
 })
 export class StudyComponent implements OnInit {
   answerState = 'hidden';
-
   @Input() study: Study | null = null;
   isCanHasAnswer: boolean = false;
-  isCanHasPicaard: boolean = true;
+  @Input()showAll: boolean = true;
   @Input() loggedInUser: LoggedInUser | null = null;
   @Input() index: number = 0;
   @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private api: ApiService, private render: Renderer2, el: ElementRef) { }
 
-  notIsCanAnswer(e: MouseEvent) {
-
-  }
   answerTransition(e: MouseEvent) {
-
     this.isCanHasAnswer = !this.isCanHasAnswer;
     this.answerState = this.isCanHasAnswer ? 'show' : 'hidden';
 
   }
-
+  onShowAll() {
+    if(this.showAll){
+      this.isCanHasAnswer = true;
+      this.answerState = 'show';
+    }else{
+      this.isCanHasAnswer = this.isCanHasAnswer;
+      this.answerState = this.answerState;
+    }
+  }
   fravritClicked(e: MouseEvent) {
     this.study = this.study as Study
     this.api.selectFavorite(this.study.id);
-    this.api.onComponentLoad();
-
     return this.clicked.emit(true);
   }
 
-  fourLights(answer: string | null | undefined) {
-    let url = "https://i.imgur.com/mKtwyFr.jpg";
-    let node = document.getElementsByTagName('h1')[0]
-    if (node) {
-      node.innerText = ''
-      let img = this.render.createElement('img');
-      this.render.appendChild(
-        node,
-        img
-      )
-      this.render.setStyle(img, 'width', '200px')
-      this.render.setStyle(img, 'height', '200px')
-      this.render.setAttribute(img, 'src', url);
-      this.isCanHasPicaard = false;
-    }
-    return;
-
-  }
-
   ngOnInit(): void {
-    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
-    this.api.onComponentLoad();
+    this.api.loggedInEvent
+    .subscribe((x) => this.loggedInUser = x);
+
+    this.api.showAnswersEvent
+    .subscribe(
+      (x)=>{
+        if(x) {
+          this.isCanHasAnswer = true;
+          this.answerState = 'show';
+        }else{
+          this.isCanHasAnswer = false;
+          this.answerState = 'hidden';
+        }
+      })
   }
 }

@@ -78,33 +78,23 @@ export class UserLoginComponent implements OnInit {
   onLogin(form: NgForm) {
     let name = form.form.value.userName;
     let pass = form.form.value.password;
-    if(!name || !pass){
+    if(!name || !pass || !this.users.some(x=> x.userName === name && x.password === pass)){
       this.loginError = true;
-      this.errorMessage = 'That user does not exist...'
+      this.errorMessage = 'Incorrect username or password...';
+      form.resetForm()
       return;
     }
     this.getUser(name, pass)
     if(this.loggedInUser as LoggedInUser){
       let loggedIn = this.loggedInUser as LoggedInUser;
-
-      setTimeout(() => {
         if(loggedIn.User){
           this.api.setUser(loggedIn.User as User) // passing the currently logged in user back to service so it is globally available, has to be done this way...
           return;
-        }
-      }, 1000)
+      }
     }
-    this.clearForm(form)
-    this.loginError = true;
-    this.errorMessage = 'That username and/or password is incorrect'
-      
   }
   clearForm(form: NgForm){
-    form.form.value.userName = ''
-    form.form.value.password = ''
-    this.userName = '';
-    this.password = '';
-    return;
+    form.resetForm()
   }
   newUser(form: NgForm) {
     let name = form.form.value.userName;
@@ -113,12 +103,10 @@ export class UserLoginComponent implements OnInit {
       this.clearForm(form)
       this.loginError = true;
       this.errorMessage = 'That data is not in the correct format...'
-      
       return;
     }
     if(this.users.filter(x=> x.userName === name)[0]){
       this.errorMessage = 'that username already exists...'
-      
       this.loginError = true;
       this.clearForm(form)
       return;
@@ -128,26 +116,16 @@ export class UserLoginComponent implements OnInit {
       userName:name,
       password:pass
     })
-      setTimeout(()=>{
-
-        this.api.setUser({
-          id:-1,
-          userName:name,
-          password:pass
-        }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
-
-      }, 1000)
-    
-
-        
-      
-    
+    this.api.setUser({
+      id:-1,
+      userName:name,
+      password:pass
+    }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
   }
   
   ngOnInit(): void {
     this.api.getAllUsers().subscribe((x) => this.users = x);
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
-    this.api.onComponentLoad();
   }
 }
 
