@@ -4,14 +4,27 @@
     flex-direction:row wrap;
     justify-content: start;
     align-items: center;
+
     padding: 2px;
     background-color: transparent;
+
     color: white;
     height: auto;
 }
-
+#fravrit-star {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    position: absolute;
+    right: 300px;
+    border-radius: 50%;
+}
 .answer {
+
     background-color: slateblue;
+
     padding: 5px;
     height: auto;
     text-align: left;

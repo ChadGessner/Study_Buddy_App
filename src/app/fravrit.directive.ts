@@ -10,10 +10,12 @@ import { LoggedInUser } from './Interfaces/loggedInUser.interface';
 
 
 @Directive({
-  selector: '[appFravrit]'
+  selector: '[appFravrit]',
+  
 })
 export class FravritDirective implements OnInit {
   loggedInUser: LoggedInUser | null = null;
+  
   constructor(
     private render: Renderer2,
     private el: ElementRef,
@@ -39,13 +41,16 @@ export class FravritDirective implements OnInit {
       )
       return;
     }
+    
     this.render.setStyle(
       target,
       'color',
       'white'
     )
   }
+
   @HostListener('document:click', ['$event']) getStar(e: MouseEvent) {
+
     this.setFavorites()
     let target = this.el.nativeElement;
     let isTarget = target === e.target as HTMLElement;

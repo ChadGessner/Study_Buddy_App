@@ -4,6 +4,13 @@ input {
   border-radius: 10px;
 }
 
+.bunton {
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(25, 71, 199);
+  color:white;
+}
+
 label {
   font-size: 18px;
 }

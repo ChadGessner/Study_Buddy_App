@@ -6,8 +6,10 @@
                 <i appFravrit class="bi bi-star-fill"></i>
             </span>
         </h3>
+
         <button (click)="answerTransition($event)" class="bunton">
             <i class="bi bi-patch-question-fill"></i>Show Answer&nbsp; &nbsp; </button>
+
         <br>
         <div class="answer-container" [@answerState]="answerState">
             <h5 class="answer" id="answer">{{study.answer}}</h5>
