@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
   @Input() loggedInUser: LoggedInUser | null = null;
   
   constructor(private api: ApiService) { }
-  homeComponentDoorbell(e:MouseEvent){
+  homeComponentDoorbell(e:MouseEvent){ //user clicks home
     this.api.homeComponentDoorbell(e);
   }
   ngOnInit(): void {

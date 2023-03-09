@@ -22,7 +22,6 @@ export class UserLoginComponent implements OnInit {
   users: User[] = [];
   @Input() loggedInUser: LoggedInUser | null = null;
   constructor(private api: ApiService) {
-    
   }
 
   isUsers() {
@@ -48,9 +47,11 @@ export class UserLoginComponent implements OnInit {
     }
     return;
   }
+
   displayErrorMessage() {
     return this.errorMessage;
   }
+
   addUser(userName: string, password: string) {
     if (!this.isUsers()) {
       return;
@@ -124,8 +125,10 @@ export class UserLoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.api.getAllUsers().subscribe((x) => this.users = x);
-    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x);
+    this.api.getAllUsers()
+    .subscribe((x) => this.users = x);
+    this.api.loggedInEvent
+    .subscribe((x) => this.loggedInUser = x);
   }
 }
 

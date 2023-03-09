@@ -4,7 +4,7 @@
 
 namespace StudyBuddy.Migrations
 {
-    public partial class first : Migration
+    public partial class azure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

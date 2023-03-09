@@ -11,8 +11,8 @@ using StudyBuddy.DAL;
 namespace StudyBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230223170022_first")]
-    partial class first
+    [Migration("20230309015440_azure")]
+    partial class azure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

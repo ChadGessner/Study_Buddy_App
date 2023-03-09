@@ -18,7 +18,7 @@
   <div *ngIf="filtered && loggedInUser">
     <div *ngFor="let study of loggedInUser.Favorites;index as i">
       <app-study  [index]="i" [study]="study"></app-study>
-      <hr>
+      
     </div>
   </div>
 </main>

@@ -43,7 +43,7 @@ export class ApiService {
               this.setUser(user.User)
               return this.onComponentLoad()
             }
-      });
+        });
       }
     }
   }
@@ -149,9 +149,9 @@ export class ApiService {
   homeComponentShowAnswersClick(e:boolean) {
     return this.showAnswersEvent.emit(e);
   }
-  homeComponentDoorbell(e:MouseEvent) {
+  homeComponentDoorbell(e:MouseEvent) { // user clicked home on nav
     if(this.loggedInUser){
-      return this.doorBell.emit(e);
+      return this.doorBell.emit(e); // emits event subscribed by home
     }
     return;
   }
