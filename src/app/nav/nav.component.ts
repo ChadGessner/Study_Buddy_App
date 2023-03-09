@@ -1,6 +1,8 @@
-import { isNgContainer } from '@angular/compiler';
-import { Component, EventEmitter } from '@angular/core';
+
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api.service';
+import { LoggedInUser } from '../Interfaces/loggedInUser.interface';
+
 
 @Component({
   selector: 'app-nav',
@@ -8,25 +10,18 @@ import { ApiService } from '../api.service';
   styleUrls: ['./nav.component.css']
 })
 
-export class NavComponent {
-  showAll:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-  isCanShowAllAnswers:boolean = false;
-  constructor(private api:ApiService) {
-    
-  }
-  getPathName() {
-    let pathArray = window.location.pathname.split('/');
-    return pathArray[
-      pathArray.length - 1
-    ]
-  }
-  showAnswers(e:MouseEvent) {
-    this.isCanShowAllAnswers = !this.isCanShowAllAnswers;
-    this.api.eventsFromNavToStudy(e)
-  }
-  showAnswersMessage() {
-    return this.isCanShowAllAnswers ? 'Show Answers!' : 'Hide Answers!';
-  }
 
+export class NavComponent implements OnInit {
+  @Input() loggedInUser: LoggedInUser | null = null;
+  
+  constructor(private api: ApiService) { }
+  homeComponentDoorbell(e:MouseEvent){
+    this.api.homeComponentDoorbell(e);
+  }
+  ngOnInit(): void {
+    this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
+  }
 
 }
+
+

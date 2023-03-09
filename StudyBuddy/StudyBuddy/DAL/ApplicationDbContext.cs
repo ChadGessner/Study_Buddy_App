@@ -59,7 +59,10 @@ namespace StudyBuddy.DAL
         .FirstOrDefault(x => x.UserName
         .ToLower()
         .Trim() == userName
-        .ToLower());
+
+        .ToLower()
+        .Trim());
+
       if (user == null)
       {
         return null;

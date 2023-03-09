@@ -15,6 +15,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { NavComponent } from './nav/nav.component';
+import { UserLogoutComponent } from './user-logout/user-logout.component';
 
 
 @NgModule({
@@ -28,14 +29,17 @@ import { NavComponent } from './nav/nav.component';
     CreateStudyComponent,
     WelcomeComponent,
     NavComponent,
- //   BrowserAnimationsModule
+
+    UserLogoutComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+
+    BrowserAnimationsModule,
 
   ],
   providers: [],

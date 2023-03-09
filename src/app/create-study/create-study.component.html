@@ -1,4 +1,11 @@
 <main>
+  <div *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
   <form #newStudy="ngForm" (ngSubmit)="postStudy(newStudy)">
     <label for="question">Question</label>
     <input name="question" ngModel />
@@ -7,6 +14,8 @@
     <input name="answer" ngModel />
     <br>
     <label for="submit"></label><br>
-    <button class="bunton" >Add Question</button>
+
+    <button class="topButton">Add Question</button>
+
   </form>
 </main>

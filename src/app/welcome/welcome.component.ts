@@ -14,6 +14,6 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.loggedInEvent.subscribe((x) => this.loggedInUser = x as LoggedInUser);
-    this.api.onComponentLoad();
+    //this.api.onComponentLoad();
   }
 }
