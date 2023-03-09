@@ -1,6 +1,6 @@
 <main>
   <div>
-    <button (click)="showAnswers($event)" >{{answers ? 'Hide All Answers' : 'Show All Answers'}}</button>
+    <button class="topButton" (click)="showAnswers($event)" >{{answers ? 'Hide All Answers' : 'Show All Answers'}}</button>
     <button 
     class="showFavoriteButton" 
     *ngIf="loggedInUser" (click)="onFiltered()"> 

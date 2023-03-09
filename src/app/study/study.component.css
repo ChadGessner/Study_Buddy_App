@@ -1,6 +1,6 @@
 
 .answer-container {
-    font-family: monospace;
+    
     display:flex;
     flex-direction:row wrap;
     justify-content: start;
@@ -8,7 +8,6 @@
     padding: 2px;
     background-color: transparent;
     color: white;
-    text-shadow: 2px 3px black;
     height: auto;
 }
 
