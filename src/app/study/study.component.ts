@@ -54,8 +54,8 @@ export class StudyComponent implements OnInit {
   answerTransition(e: MouseEvent) {
     this.isCanHasAnswer = !this.isCanHasAnswer;
     this.answerState = this.isCanHasAnswer ? 'show' : 'hidden';
-
   }
+
   onShowAll() {
     if(this.showAll){
       this.isCanHasAnswer = true;
@@ -65,7 +65,8 @@ export class StudyComponent implements OnInit {
       this.answerState = this.answerState;
     }
   }
-  fravritClicked(e: MouseEvent) {
+  
+  fravritClicked() {
     this.study = this.study as Study
     this.api.selectFavorite(this.study.id);
     return this.clicked.emit(true);

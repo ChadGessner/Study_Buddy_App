@@ -47,6 +47,7 @@ app-home {
     background-color: #4361EE;
     padding: 10px;
     color:white;
+    height:auto;
 }
 
 .bi {
@@ -87,8 +88,8 @@ a:link {
 .bunton {
     border: none;
     border-radius: 4px;
-    color: white;
-    background-color: pink;
+    color: #4361EE;
+    background-color: rgb(192, 255, 198);
     box-shadow: 1px 0 1px 0 grey;
 }
 .bunton::click {

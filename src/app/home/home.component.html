@@ -12,7 +12,7 @@
   <div *ngIf="!filtered || !loggedInUser">
     <div *ngFor="let study of studies;index as i">
       <app-study [showAll]="answers" [index]="i" [study]="study"></app-study>
-      <hr>
+      <hr class="line">
     </div>
   </div>
   <div *ngIf="filtered && loggedInUser">

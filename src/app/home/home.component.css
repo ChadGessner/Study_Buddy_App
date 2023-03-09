@@ -1,3 +1,21 @@
 .showFavoriteButton {
     float: right;
 }
+
+
+.question{
+    /* height: auto; */
+    padding: 0%;
+}
+
+
+.appStudyCss{
+    height: auto;
+    padding: 0%;
+}
+
+
+.line{
+    padding: 0%;
+    margin: 1px auto;
+}
