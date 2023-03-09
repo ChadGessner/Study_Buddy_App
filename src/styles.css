@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-color: #E4F0FF;
+    background-color: #4361EE;
 }
 
 .container {
@@ -26,14 +26,15 @@ app-header {
     font-size: 16px;
     grid-area: header;
     text-align: center;
-    background-color: #7e7d7d;
+    background-color: #3A0CA3;
 }
 
 
 app-nav {
+    color: white;
     grid-area: nav;
     margin-left: 0.1rem;
-    background-color: #adadad;
+    background-color: #7209B7;
 
 }
 
@@ -43,8 +44,9 @@ app-user-login,
 app-user-logout,
 app-home {
     grid-area: content;
-    background-color: #f0ebdb;
-    padding: 20px;
+    background-color: #4361EE;
+    padding: 10px;
+    color:white;
 }
 
 .bi {
@@ -55,8 +57,32 @@ app-home {
 
     margin: 10px 0;
     border-radius: 10px;
-
 }
+
+a:link {
+    color: white;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: white;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+    font-style:italic;
+  }
+  
+  /* selected link */
+  a:active {
+    color: pink;
+  }
+
+  .yello-color
+  {
+    color:yellow;
+  }
 
 .bunton {
     border: none;
