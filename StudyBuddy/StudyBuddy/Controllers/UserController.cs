@@ -25,18 +25,21 @@ namespace StudyBuddy.Controllers
     [HttpGet("Login/{userName}/{password}")]
     public User Get(string userName, string password)
     {
+
       User user = _db.GetUser(userName);
       if(user == null || user.Password != password)
       {
         return null;
       }
       return user;
+
     }
 
 
     [HttpPost("CreateLogin/{userName}/{password}")]
     public User Post(string userName,string password)
     {
+
       return _db.AddUser(userName, password);
     }
 

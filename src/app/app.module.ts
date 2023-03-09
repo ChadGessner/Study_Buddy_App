@@ -13,6 +13,7 @@ import { CreateStudyComponent } from './create-study/create-study.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 import { NavComponent } from './nav/nav.component';
 import { UserLogoutComponent } from './user-logout/user-logout.component';
 
@@ -28,7 +29,9 @@ import { UserLogoutComponent } from './user-logout/user-logout.component';
     CreateStudyComponent,
     WelcomeComponent,
     NavComponent,
+
     UserLogoutComponent
+
   ],
   imports: [
     BrowserModule,

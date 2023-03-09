@@ -10,10 +10,12 @@ import { LoggedInUser } from './Interfaces/loggedInUser.interface';
 
 
 @Directive({
-  selector: '[appFravrit]'
+  selector: '[appFravrit]',
+  
 })
 export class FravritDirective implements OnInit {
   loggedInUser: LoggedInUser | null = null;
+  
   constructor(
     private render: Renderer2,
     private el: ElementRef,
@@ -35,17 +37,20 @@ export class FravritDirective implements OnInit {
       this.render.setStyle(
         target,
         'color',
-        'pink'
+        'yellow'
       )
       return;
     }
+    
     this.render.setStyle(
       target,
       'color',
-      'grey'
+      'white'
     )
   }
-  @HostListener('document:click', ['$event']) getPink(e: MouseEvent) {
+
+  @HostListener('document:click', ['$event']) getStar(e: MouseEvent) {
+
     this.setFavorites()
     let target = this.el.nativeElement;
     let isTarget = target === e.target as HTMLElement;
@@ -56,18 +61,18 @@ export class FravritDirective implements OnInit {
       alert("You must login first before you can select fravrits!");
       return;
     }
-    if (target.style.color !== 'pink') {
+    if (target.style.color !== 'yellow') {
       this.render.setStyle(
         target,
         'color',
-        'pink'
+        'yellow'
       )
       //this.api.onComponentLoad();
     } else {
       this.render.setStyle(
         target,
         'color',
-        'grey'
+        'white'
       )
       //this.api.onComponentLoad();
     }
