@@ -36,7 +36,6 @@ import {
       })),
       transition('show => hidden', animate(400)),
       transition('hidden => show', animate(400)),
-
     ])
   ]
 })
