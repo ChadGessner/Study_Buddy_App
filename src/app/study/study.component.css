@@ -11,16 +11,7 @@
     color: white;
     height: auto;
 }
-#fravrit-star {
-    height: 100px;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    background-color: black;
-    position: absolute;
-    right: 300px;
-    border-radius: 50%;
-}
+
 .answer {
 
     background-color: slateblue;
