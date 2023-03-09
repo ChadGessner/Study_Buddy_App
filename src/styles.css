@@ -47,6 +47,7 @@ app-home {
     background-color: #4361EE;
     padding: 10px;
     color:white;
+    height:auto;
 }
 
 .bi {
@@ -84,13 +85,23 @@ a:link {
     color:yellow;
   }
 
+
 .bunton {
     border: none;
     border-radius: 4px;
-    color: white;
-    background-color: pink;
-    box-shadow: 1px 0 1px 0 grey;
+    color: #4361EE;
+    background-color: #eef1e8;
+    box-shadow: 1px 0 1px 0 #808080;
 }
+
+.topButton {
+    border: none;
+    border-radius: 4px;
+    color: #4361EE;
+    background-color: #ffffff;
+    box-shadow: 1px 0 1px 0 #808080;
+}
+
 .bunton::click {
     transform: translateX(2px)
 }

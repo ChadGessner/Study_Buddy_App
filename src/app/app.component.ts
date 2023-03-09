@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from './api.service';
 import { Study } from './Interfaces/study.interface';
 import { NgForm } from '@angular/forms'
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   getUser() {
   }
-
+  
   getPathName() {
     let pathArray = window.location.pathname.split('/');
     return pathArray[

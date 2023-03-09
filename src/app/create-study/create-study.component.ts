@@ -33,11 +33,7 @@ export class CreateStudyComponent implements OnInit {
           this.successMessage = 'Data added successfully!';
           this.errorMessage="";
           newStudy.resetForm()
-          
-        // }else{
-        //   this.errorMessage = "BRRRRRRRRRRRRRRRRRRRRRRRRR";
         }
-        
       },);
     }
     this.getStudies();

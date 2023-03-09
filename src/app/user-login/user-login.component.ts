@@ -11,12 +11,14 @@ import { User } from '../Interfaces/user.interface';
 })
 
 export class UserLoginComponent implements OnInit {
+
   static onLogout() {
     throw new Error('Method not implemented.');
   }
 
   @Input()userName: string = '';
   @Input()password: string = '';
+
   loginError: boolean = false;
   errorMessage:string = ''
   users: User[] = [];
@@ -33,19 +35,32 @@ export class UserLoginComponent implements OnInit {
     }
   }
 
-  isRegistered(userName: string, password: string) {
+  isRegistered(userName: string):User|undefined {
     if (!this.isUsers()) {
       return undefined;
     }
     return this.users
-      .filter(x => x.userName === userName && x.password === password)[0];
+      .filter(x => x.userName === userName)[0];
   }
-
+  isPassword(user:User, password:string) {
+    
+    return user.password === password;
+  }
   getUser(userName: string, password: string) {
-    let user = this.isRegistered(userName, password);
-    if (user) {
-      this.api.setUser(user);
+    let user = this.isRegistered(userName);
+    if (!user) {
+      this.loginError = true;
+      this.postErrorMessage("That username does not exist!");
+      return;
+      
+    }else if( !this.isPassword(user, password)){
+      this.loginError = true;
+      this.postErrorMessage("Incorrect Password!");
+      return;
     }
+    console.log("User logged in I guess");
+    
+    this.api.setUser(user);
     return;
   }
   displayErrorMessage() {
@@ -55,6 +70,7 @@ export class UserLoginComponent implements OnInit {
     if (!this.isUsers()) {
       return;
     }
+
     if(this.users.filter(x=> x.userName === userName)[0]){
       this.errorMessage = 'That username already exists...'
       this.loginError = true;
@@ -68,6 +84,7 @@ export class UserLoginComponent implements OnInit {
       userName:userName,
       password:password
     });
+
   }
 
   onLogout() {
@@ -78,6 +95,7 @@ export class UserLoginComponent implements OnInit {
   onLogin(form: NgForm) {
     let name = form.form.value.userName;
     let pass = form.form.value.password;
+
     if(!name || !pass || !this.users.some(x=> x.userName === name && x.password === pass)){
       this.loginError = true;
       this.errorMessage = 'Incorrect username or password...';
@@ -95,10 +113,12 @@ export class UserLoginComponent implements OnInit {
   }
   clearForm(form: NgForm){
     form.resetForm()
+
   }
   newUser(form: NgForm) {
     let name = form.form.value.userName;
     let pass = form.form.value.password;
+
     if(!name || !pass){
       this.clearForm(form)
       this.loginError = true;
@@ -121,6 +141,7 @@ export class UserLoginComponent implements OnInit {
       userName:name,
       password:pass
     }) // passing the currently logged in user back to service so it is globally available, has to be done this way...
+
   }
   
   ngOnInit(): void {
