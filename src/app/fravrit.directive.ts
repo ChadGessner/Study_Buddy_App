@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ApiService } from './api.service';
 import { LoggedInUser } from './Interfaces/loggedInUser.interface';
-import { User } from './Interfaces/user.interface';
+
 
 @Directive({
   selector: '[appFravrit]'

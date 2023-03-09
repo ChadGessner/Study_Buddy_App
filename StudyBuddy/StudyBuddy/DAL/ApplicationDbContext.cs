@@ -53,9 +53,14 @@ namespace StudyBuddy.DAL
       }
       return false;
     }
-    public User GetUser(string userName, string password)
+    public User GetUser(string userName)
     {
-      User user = GetUsers().FirstOrDefault(x => x.UserName == userName && x.Password == password);
+      User user = GetUsers()
+        .FirstOrDefault(x => x.UserName
+        .ToLower()
+        .Trim() == userName
+        .ToLower()
+        .Trim());
       if (user == null)
       {
         return null;
@@ -64,7 +69,8 @@ namespace StudyBuddy.DAL
     }
     public User GetUserById(int id)
     {
-      User user = GetUsers().FirstOrDefault(x => x.Id == id);
+      User user = GetUsers()
+        .FirstOrDefault(x => x.Id == id);
       if(user == null)
       {
         return null;
@@ -73,13 +79,18 @@ namespace StudyBuddy.DAL
     }
     public User AddUser(string userName, string password)
     {
+      User toAdd = GetUser(userName);
+      if(toAdd != null)
+      {
+        return null;
+      }
       User.Add(new Models.User()
       {
         UserName = userName,
         Password = password
       });
       SaveChanges();
-      return GetUser(userName, password);
+      return GetUser(userName);
     }
     public Study FavoriteStudy(int studyId, int userId)
     {
@@ -104,7 +115,8 @@ namespace StudyBuddy.DAL
     }
     public Study GetStudy(int studyId)
     {
-      Study study = GetStudies().FirstOrDefault(x => x.Id == studyId);
+      Study study = GetStudies()
+        .FirstOrDefault(x => x.Id == studyId);
       if(study == null)
       {
         return null;
@@ -112,18 +124,51 @@ namespace StudyBuddy.DAL
       return study;
     }
 
+    public Study GetStudyByQAndA(string question, string answer)
+    {
+      return GetStudies()
+        .FirstOrDefault(x => x.Question
+        .ToLower()
+        .Trim() == question
+        .ToLower()
+        .Trim() && x.Answer
+        .ToLower()
+        .Trim() == answer
+        .ToLower()
+        .Trim());
+    }
+
     public List<Study> GetAllFavorites(int userId)
     {
-      List<Study> favorites = JustFavorites().Where(x => x.UserId == userId).Select(x => GetStudy(x.StudyId)).ToList();
+      List<Study> favorites = JustFavorites()
+        .Where(x => x.UserId == userId)
+        .Select(x => GetStudy(x.StudyId))
+        .ToList();
+
       if (favorites == null)
       {
         return null;
       }
       return favorites;
     }
-
+    public Study RemoveStudy(int id)
+    {
+      Study toRemove = GetStudy(id);
+      if(toRemove == null)
+      {
+        return toRemove;
+      }
+      Study.Remove(toRemove);
+      SaveChanges();
+      return toRemove;
+    }
     public Study AddStudy(string question, string answer)
     {
+      Study toAdd = GetStudyByQAndA(question, answer);
+      if(toAdd != null)
+      {
+        return null;
+      }
       Study study = new Study()
       {
         Question= question,
@@ -134,27 +179,15 @@ namespace StudyBuddy.DAL
       return study;
     }
 
-
-    //public bool DeleteFromStudyById(int id)
-    //{
-    //  Study study = GetStudy(id);
-    //  if(study == null){
-    //    return false;
-    //  } 
-    //  Study.Remove(study);
-    //  SaveChanges();
-      
-    //  return true;      
-    //}
-
-
     public List<Favorite> JustFavorites()
     {
       return Favorites.ToList();
     }
     public bool DeleteFromFavoriteById(int userId, int studyId)
     {
-      Favorite favorite = JustFavorites().Where(x => x.UserId == userId).FirstOrDefault(x => x.StudyId == studyId);
+      Favorite favorite = JustFavorites()
+        .Where(x => x.UserId == userId)
+        .FirstOrDefault(x => x.StudyId == studyId);
 
       if (favorite == null)
       {
