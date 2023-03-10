@@ -94,6 +94,5 @@ export class StudyComponent implements OnInit {
           this.answerState = 'hidden';
         }
       })
-
   }
 }
