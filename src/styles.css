@@ -2,6 +2,7 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 
+
 body {
     margin: 0;
     padding: 0;
@@ -34,8 +35,10 @@ app-nav {
     color: white;
     grid-area: nav;
     margin-left: 0.1rem;
-    background-color: #7209B7;
-
+    /* background-color: #7209B7; */
+    
+    background-image: linear-gradient(rgb(58, 6, 71) 0%, rgb(5, 39, 103)  70%);
+    
 }
 
 app-study,
@@ -44,6 +47,7 @@ app-user-login,
 app-user-logout,
 app-home {
     grid-area: content;
+    
     background-color: #4361EE;
     padding: 10px;
     color:white;

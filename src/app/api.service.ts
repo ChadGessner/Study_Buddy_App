@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Study } from 'src/app/Interfaces/study.interface'
 import { User } from './Interfaces/user.interface';
 import { LoggedInUser } from './Interfaces/loggedInUser.interface';
-import { TestRepoService } from './test-repo.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +12,17 @@ import { TestRepoService } from './test-repo.service';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  userURI: string = 'https://localhost:7087/api/User/';
+  userURI: string = 'https://localhost:7087/api/User/'; 
   loginURI: string = '';
   selectFavoriteURI: string = 'https://localhost:7087/api/User/AddFavorite/';
   removeFavoriteURI: string = 'https://localhost:7087/api/User/DeleteFavorite/';
   studyURI: string = 'https://localhost:7087/api/Study/';
   bounceFromNavToStudy:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   loggedInUser: LoggedInUser | null = null;
-  @Output()doorBell:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-  @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>();
-  @Output() showAnswersEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
-  selectFavorite(studyId: number) {
+  @Output() doorBell:EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>(); // for communication between nav ==> home they have no relationship because routing
+  @Output() loggedInEvent: EventEmitter<LoggedInUser> = new EventEmitter<LoggedInUser>(); // event emmited after loggedInUser is fully populated, it requires two subscriptions
+  @Output() showAnswersEvent:EventEmitter<boolean> = new EventEmitter<boolean>(); // event emmited from (parent) home ==> (child) study
+  selectFavorite(studyId: number) { 
 
     let userId = -1;
     let user = this.loggedInUser as LoggedInUser;
@@ -64,7 +64,7 @@ export class ApiService {
     return this.http.get<User[]>(this.userURI, {});
   }
 
-  getLoggedInUserFavorites(user:User) {
+  getLoggedInUserFavorites(user:User) { // finalizes the LoggedInUser subscribed data
 
       return this.http.get<Study[]>(this.studyURI + `GetAllUserFavorites/${user.id}`)
       .subscribe(
@@ -135,11 +135,11 @@ export class ApiService {
     return this.loggedInUser as LoggedInUser;
   }
 
-  getStudy() {
+  getStudy() { // get method for questions
     return this.http.get<Study[]>(this.studyURI);
   }
 
-  createStudy(study: Study) {
+  createStudy(study: Study) { // post method for questions
     let question = study.question.split(
       ' '
     ).join('%20');
@@ -150,7 +150,6 @@ export class ApiService {
   }
   homeComponentShowAnswersClick(e:boolean) {
     return this.showAnswersEvent.emit(e);
-
   }
   homeComponentDoorbell(e:MouseEvent) {
     if(this.loggedInUser){

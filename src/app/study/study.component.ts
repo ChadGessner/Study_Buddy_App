@@ -6,7 +6,6 @@ import {
     Input,
      OnInit,
       Renderer2,
-       HostListener,
         EventEmitter,
          Output } from '@angular/core';
 
@@ -34,13 +33,13 @@ import {
       })),
       state('hidden', style({
         'opacity': '0',
+        'scrolling-behavior' : 'none',
         'transform': 'translateX(1200px)'
       })),
 
       transition('show => hidden', animate(400)),
       transition('hidden => show', animate(400)),
     ])
-
   ]
  })
 export class StudyComponent implements OnInit {
