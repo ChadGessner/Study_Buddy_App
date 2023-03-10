@@ -50,10 +50,12 @@ export class UserLoginComponent implements OnInit {
     let user = this.isRegistered(userName);
     if (!user) {
       this.loginError = true;
+
       return;
       
     }else if( !this.isPassword(user, password)){
       this.loginError = true;
+
       return;
     }
     console.log("User logged in I guess");

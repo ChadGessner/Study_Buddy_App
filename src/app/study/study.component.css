@@ -8,6 +8,7 @@ main {
     flex-direction:row wrap;
     justify-content: start;
     align-items: center;
+
     padding: 2px;
     background-color: transparent;
 

@@ -58,7 +58,7 @@ export class FravritDirective implements OnInit {
       return;
     }
     if (!this.validateLoginStatus()) {
-      alert("You must login first before you can select fravrits!");
+      alert("You must login first before you can select favorites!");
       return;
     }
     if (target.style.color !== 'yellow') {
